@@ -46,3 +46,17 @@ The following parameters are critical for GaN characterization. </br>
 * DC busbar designs on PCB with variable inductance can be considered.
 * Parallel operation will be discussed later.
 * Care should be taken for measurements (temperature, current etc.).
+* Filtering (common mode etc.) on the gate driver isolated supply can be considered on the PCB.
+
+#### Some notes the behaviour of GaN and potential research topics
+* Active turn-on, passive turn-on etc. can be investigated experimentally. A mode-by-mode analysis on the oscilloscope waveforms can be applied.
+* State trajectories on experimental waveforms can be studied.
+* Care should be given to the gate driver delay skew when designing the PCB.
+* Optimum negative bias voltage can be studied concerning the false turn-on phenomena (device has very low threshold).
+* The negative absolute minimum of the GaN device gate should also be considered for spikes caused by miller effect.
+* Some precautions can be taken on the gate (diode + TVS etc.) on the PCB.
+* A comparative analysis with switching loss and dv/dt (and di/dt) rates can be studied with variable resistances (and/or other parameters ???).
+* In addition to the trade-off between loss and spikes, study on critical frequencies (to avoid), sustained oscillation possibilities etc. can be conducted and verified experimentally (apart from the almost linear relation between these parameters). This will be easier when a mathematical model is developed.
+* For the aforomentioned critical frequcies, some damping measures can be considered. Effect of ferrite bead can be investigated. Although it may introduce additional inductance to the gate-source path, its relatively high impedance on high frequencies (which are around possible gate oscillation frequencies) will help damping the oscillations.  This should be included on both Simulink model and state space model.
+* RC snubber across gate-source ??? Not very common.
+*
