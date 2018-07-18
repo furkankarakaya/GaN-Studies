@@ -38,7 +38,7 @@ The following parameters are critical for GaN characterization. </br>
 * There are two possibilities for Lg-ex:
   1. Accurate modeling using analytical and/or FEA methods (Comsol etc.) for the designed PCB.
   2. Variable inductance using multi-layer PCBs and interchangable connections for characterization.
-* There are several elements in the gate drive path which may introduce delay to the digital pwm signal. A complete analysis may be done.
+* There are several elements in the gate drive path which may introduce delay to the digital pwm signal. A complete analysis may be done. (Cuma Tartışılabilir - Schmidt Trigger)
 * Cgs dependent (variable) model is not usually provided. An analytical study can be applied for its characterization.
 * A mathematical modeling approach (state space etc.) will be studied ASAP.
 * A closed loop model including thermal model (GaN + all other elements), loss model and GaN model on Simulink will be studied. It can be applied to the IMMD later.
