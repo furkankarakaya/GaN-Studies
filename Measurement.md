@@ -15,6 +15,8 @@ There are five different methods to measure device current. </br>
 + Coaxial shunt resistors have BW up to 2 GHz
 - Coaxial shunt resistors are rare and expensive
 - Protection should be taken into consideration
+- The power is limited (2W)
+- Increase in parasitic inductance on power loop
 
 ##### Pros and Cons of Rogowski Coil
 + Simple method
@@ -40,3 +42,8 @@ There are five different methods to measure device current. </br>
 
 ##### References
 (1) https://ieeexplore.ieee.org/document/8025825/
+
+#### Voltage Measurement
+
+Voltage measurement is simpler than current measurement. A voltage probe with BW larger than 350 MHz is enough. </br>
+On the PCB, the vias/holes should be placed close to the DUT.
