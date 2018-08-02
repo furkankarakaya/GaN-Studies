@@ -173,7 +173,7 @@ ___
 ##### Xie, R., Yang, X., Xu, G., Wei, J., Wang, Y., Wang, H., … Chen, K. J. (2018).
 Switching Transient Analysis for Normally-Off GaN Transistors with p-GaN Gate in a Phase-Leg Circuit.
  IEEE Transactions on Power Electronics, PP(c), 1–1. https://doi.org/10.1109/TPEL.2018.2852142
- 
+
 * The C-V measurement is conducted as follows. Under a given gate bias condition, **a high-frequency
 (e.g. 1MHz) AC voltage signal would be applied to the capacitor under test.** By measuring the output
  current, the impedance (which includes conductance and capacitance) value could be calculated.
