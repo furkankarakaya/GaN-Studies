@@ -1,5 +1,5 @@
-### Structure - General Characteristics
-##### GaN Transistors for Efficient Power Conversion. (2014). https://doi.org/10.1002/9781118844779
+## Structure - General Characteristics
+#### GaN Transistors for Efficient Power Conversion. (2014). https://doi.org/10.1002/9781118844779
 * Crystal structure also gives GaN **piezoelectric properties** that lead to its ability to achieve very high
 conductivity compared with other semiconductor materials. Piezoelectricity in GaN is predominantly caused
 by the displacement of charged elements in the crystal lattice. If the lattice is subjected to strain,
@@ -52,7 +52,7 @@ the Miller ratio,** is often an important metric to determine the point at which
 on due to a voltage transient applied across the drain and source.
 
 ___
-##### Xie, R., Yang, X., Xu, G., Wei, J., Wang, Y., Wang, H., … Chen, K. J. (2018).
+#### Xie, R., Yang, X., Xu, G., Wei, J., Wang, Y., Wang, H., … Chen, K. J. (2018).
 Switching Transient Analysis for Normally-Off GaN Transistors with p-GaN Gate in a Phase-Leg Circuit.
  IEEE Transactions on Power Electronics, PP(c), 1–1. https://doi.org/10.1109/TPEL.2018.2852142
 
@@ -69,11 +69,31 @@ removed holes in p-GaN layer [23]. Therefore, both the Schottky junction J1 and 
  Taking J1 as an example, during a switching period, the charging/discharging current of intrinsic capacitance C1 would
   be 1.5~1.9x104 times higher than its leakage current (0.4A~0.6A vs. 21.1µA~39.3µA). Consequently, **the diode would not
    be taken into consideration in the circuit-level analysis**, on account of the dominant role played by capacitance’s displacement current.
+___
+#### Jones, E. A., Wang, F. F., & Costinett, D. (2016). Review of Commercial GaN Power Devices and GaN-Based Converter Design Challenges. IEEE Journal of Emerging and Selected Topics in Power Electronics, 4(3), 707–719. https://doi.org/10.1109/JESTPE.2016.2582685
+
+* At the interface between these two layers, a layer of high-mobility electrons called “two-dimensional electron gas” (2DEG) forms as a result of the **crystal polarity**, and is also augmented by **piezoelectric crystal strain** due to the **lattice mismatch between AlGaN and GaN**.
+
+* When this voltage exceeds the **threshold voltage Vgd,th**, which is typically **approximately the same as the specified Vgs,th**, the e-mode device channel will turn on and allow reverse current to flow.
+
+* The voltage drop in the SCRC mode will then be, eqn, where Rsd,rev is the effective channel resistance during SCRC. Rsd,rev is typically higher than Rds,on and varies with Tj , Vgs, and Id.
+</br>![](images/GaNReverseDrop.png?raw=true)
+
+* **Current collapse** has been a widely reported phenomenon
+for lateral GaN devices, causing a temporary increase in ON-resistance that is proportional to blocking voltage. The first is the **trapping of surface charges near the drain edge of the gate terminal** when the device is in its OFF-state. During the following ON-state, these trapped charges act as a virtual gate, weakening the 2DEG until they are released. The second mechanism is **the injection of hot electrons into even deeper traps within the device**, particularly in traps caused by carbon doping in the buffer layer. These trapped charges weaken the 2DEG and increase Rds,on,and may also cause **long-term degradation** to the device.
+
+* **Source and gate field plates** help to redistribute the gate–drain **electric field away from the gate edge**.
+</br>![](images/GaNplate.png?raw=true)
+
+* **Steady-state gate current** is expected during normal operation **for e-mode HFETs with p-doped gate caps**.
+
+* The **threshold voltage** of most GaN devices is relatively **stable over temperature**.
+
 
 ___
-### Modelling
+## Modelling
 
-##### GaN Transistors for Efficient Power Conversion. (2014). https://doi.org/10.1002/9781118844779
+#### GaN Transistors for Efficient Power Conversion. (2014). https://doi.org/10.1002/9781118844779
 * The **voltage overshoot damping** rate is dependent on the **skin and proximity effect** losses at the ringing frequency.
 To **approximate** this, a **parallel damping resistance of 1Ω** is placed across each of the parasitic
 inductance elements.
@@ -81,9 +101,9 @@ inductance elements.
 * The **plateau voltage** is where the current crosses Vgs at specific Vds values.
 </br>![](images/GaNIdsvsVgsTemp.png?raw=true)
 
-### Switching / Loss Characterization
+## Switching / Loss Characterization
 
-##### GaN Transistors for Efficient Power Conversion. (2014). https://doi.org/10.1002/9781118844779
+#### GaN Transistors for Efficient Power Conversion. (2014). https://doi.org/10.1002/9781118844779
 * It is often very convenient to look at the amount of charge necessary to change the voltage across
 various terminals in the GaN HEMT.
 * **QGS:** Charge required to increase gate voltage from zero to the plateau voltage.
@@ -110,10 +130,25 @@ Charge required to commutate the device voltage, at which point the device enter
   the sum of the two negative effects and the positive effect has a net negative result, which means
   that the loop inductance will increase losses in the circuit
 
-### Parasitics
-### Gate Driver Design
+___
+#### Jones, E. A., Wang, F. F., & Costinett, D. (2016). Review of Commercial GaN Power Devices and GaN-Based Converter Design Challenges. IEEE Journal of Emerging and Selected Topics in Power Electronics, 4(3), 707–719. https://doi.org/10.1109/JESTPE.2016.2582685
 
-##### GaN Transistors for Efficient Power Conversion. (2014). https://doi.org/10.1002/9781118844779
+* The **switching performance of the cascode device** relies heavily on the **parasitic inductances** in the package, especially between the two dies, and also on how well the junction capacitances of the two are matched. If the **inductances are too high**, or the **capacitances are not matched** well, the switching **losses can increase** significantly.
+
+* **In hard-switched converters**, the two significant sources of
+switching energy losses are the **energy related to stored charge in the output capacitors (Coss loss)** and the **loss from conduction of the load current through a saturated device channel (overlap loss)**.
+
+
+
+## Parasitics
+___
+#### Jones, E. A., Wang, F. F., & Costinett, D. (2016). Review of Commercial GaN Power Devices and GaN-Based Converter Design Challenges. IEEE Journal of Emerging and Selected Topics in Power Electronics, 4(3), 707–719. https://doi.org/10.1109/JESTPE.2016.2582685
+
+* Some devices provide a Kelvin source connection, which is a separate connection to the source metallization that is only used by the gate loop, decoupling it more effectively from power loop transient effects [65]–[68].
+
+## Gate Driver Design
+
+#### GaN Transistors for Efficient Power Conversion. (2014). https://doi.org/10.1002/9781118844779
 
 * To critically damp this loop, the overall **gate loop resistance** RG(eq) (RG(eq) =RG +RSource
 ) must be larger than the value given in Equation 3.1. This is achieved by minimizing
@@ -152,9 +187,14 @@ layout. This is accomplished by **separating the gate and power loops** to as cl
   driver the same way as the floating high-side driver. Although **a level-shifter** increases complexity and component count,
   it does have the added advantage of **improving the gate driver propagation delay matching** between the high side and low side.
 
-### Measurement
+___
+#### Jones, E. A., Wang, F. F., & Costinett, D. (2016). Review of Commercial GaN Power Devices and GaN-Based Converter Design Challenges. IEEE Journal of Emerging and Selected Topics in Power Electronics, 4(3), 707–719. https://doi.org/10.1109/JESTPE.2016.2582685
 
-##### GaN Transistors for Efficient Power Conversion. (2014). https://doi.org/10.1002/9781118844779
+* It is generally concluded that these **RF-based digital isolators tolerate higher dv/dt** than alterna- tives.  
+
+## Measurement
+
+#### GaN Transistors for Efficient Power Conversion. (2014). https://doi.org/10.1002/9781118844779
 * To yield an accurate representation of the waveform rise time, a rule of thumb is that a
  **bandwidth between three and five times** that of Equation 5.1 is required
 </br>![](images/ScopeBW.png?raw=true)
@@ -170,7 +210,7 @@ layout. This is accomplished by **separating the gate and power loops** to as cl
 any significant increase in power loop inductance will adversely affect switching operation.
 
 ___
-##### Xie, R., Yang, X., Xu, G., Wei, J., Wang, Y., Wang, H., … Chen, K. J. (2018).
+#### Xie, R., Yang, X., Xu, G., Wei, J., Wang, Y., Wang, H., … Chen, K. J. (2018).
 Switching Transient Analysis for Normally-Off GaN Transistors with p-GaN Gate in a Phase-Leg Circuit.
  IEEE Transactions on Power Electronics, PP(c), 1–1. https://doi.org/10.1109/TPEL.2018.2852142
 
@@ -182,5 +222,5 @@ Switching Transient Analysis for Normally-Off GaN Transistors with p-GaN Gate in
    to AC guard, the AC disturbance signal would be cut off. As a result, the Cgd-Vdg curve could be
    acquired.
 </br>![](images/CapacitanceHighFreqMeasurement.png?raw=true)
-### Protection
-### Application
+## Protection
+## Application
