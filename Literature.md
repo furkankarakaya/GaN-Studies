@@ -210,9 +210,7 @@ ___
 any significant increase in power loop inductance will adversely affect switching operation.
 
 ___
-#### Xie, R., Yang, X., Xu, G., Wei, J., Wang, Y., Wang, H., … Chen, K. J. (2018).
-Switching Transient Analysis for Normally-Off GaN Transistors with p-GaN Gate in a Phase-Leg Circuit.
- IEEE Transactions on Power Electronics, PP(c), 1–1. https://doi.org/10.1109/TPEL.2018.2852142
+#### Xie, R., Yang, X., Xu, G., Wei, J., Wang, Y., Wang, H., … Chen, K. J. (2018). Switching Transient Analysis for Normally-Off GaN Transistors with p-GaN Gate in a Phase-Leg Circuit.  IEEE Transactions on Power Electronics, PP(c), 1–1. https://doi.org/10.1109/TPEL.2018.2852142
 
 * The C-V measurement is conducted as follows. Under a given gate bias condition, **a high-frequency
 (e.g. 1MHz) AC voltage signal would be applied to the capacitor under test.** By measuring the output
@@ -223,4 +221,22 @@ Switching Transient Analysis for Normally-Off GaN Transistors with p-GaN Gate in
    acquired.
 </br>![](images/CapacitanceHighFreqMeasurement.png?raw=true)
 ## Protection
+
+#### Jones, E. A., Williford, P., & Wang, F. (2017). A fast overcurrent protection scheme for GaN GITs. 2017 IEEE 5th Workshop on Wide Bandgap Power Devices and Applications, WiPDA 2017, 2017–December, 277–284. https://doi.org/10.1109/WiPDA.2017.8170560
+
+* The **desaturation detection circuit’s sensing diode** requires **significant settling time** after the drain voltage falls in turn-on transients. This diode also **adds capacitive loading in parallel with the output capacitance, which increases switching loss**.
+
+* The **internal gate voltage acts as a diode**, due to the junction created by the p-doped GaN layer implanted beneath the gate metallization. As with a discrete diode, **there is a measurable relationship between its voltage and current**.
+</br>![](images/GaNProtectionIdVgs.jpg?raw=true)
+
+The main logic is that </br>
+i) The gate of the GIT device sinks a current under steady state operation</br>
+ii) Therefore, Vgs,diode is constant for steady-State </br>
+iii) There is a relation between Id and Vgs,ext which says the current can be followed through Vgs,ext 
+</br>![](images/GaNProtectionEqn.jpg?raw=true)
+
+* Vgs,sense must be filtered for immunity to turn-on transient spikes and noise
+
+* One of the reasons that strong noise immunity and fast
+response are expected from **this protection circuit** is that it **uses the same references and supply voltages as the gate driver IC**, **avoiding the need for any isolation** between the sensed gate voltage and the comparator circuit.
 ## Application
