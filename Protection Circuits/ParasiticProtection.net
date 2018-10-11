@@ -1,0 +1,38 @@
+* D:\GitHub Repositories\GaN-Studies\Protection Circuits\ParasiticProtection.asc
+V1 N001 0 270
+R1 N005 N004 10
+R2 N012 N011 10
+L1 N004 N003 2e-9
+L2 N011 N010 2e-9
+V2 N003 N007 PULSE(-3 6 00e-9 1e-9 1e-9 400e-9 1000e-9)
+V3 N010 N014 PULSE(-3 6 0e-9 1e-9 1e-9 400e-9 1000e-9)
+Lparasitic Vpara 0 3e-9
+R3 Vfilter Vpara 2
+C1 Vfilter 0 22e-9
+V4 Vref 0 4
+V5 Vcc 0 5
+R4 N005 N006 2
+D1 N006 N004 D
+D2 N013 N011 D
+R5 N012 N013 2
+V6 Vee 0 -5
+XU3 Vfilter Vref Vcc Vee ParasResult level.2 Avol=1Meg GBW=100000Meg Slew=10000Meg ilimit=25m rail=0 Vos=0 phimargin=45 en=0 enk=0 in=0 ink=0 Rin=500Meg
+L4 N001 Vpos 30e-9
+C2 Vfilt2 Vpara 39e-12
+R6 Vpos Vfilt2 50k
+R7 Vpara Vfilt2 1k
+V7 Vref2 Vpara 4.3
+V8 Vcc2 Vpara 5
+V9 Vee2 Vpara -5
+I1 N008 0 20
+XU1 N005 Vpos N008 N007 GS66508B_L1V2
+XU2 N012 N008 Vpara N014 GS66508B_L1V2
+XU4 Vref2 Vfilt2 Vcc2 Vee2 DSVResult level.2 Avol=1Meg GBW=100000Meg Slew=10000Meg ilimit=25m rail=0 Vos=0 phimargin=45 en=0 enk=0 in=0 ink=0 Rin=500Meg
+.model D D
+.lib C:\Users\Furkan\Documents\LTspiceXVII\lib\cmp\standard.dio
+.tran 2e-6
+.option temp=25
+.lib GaN_LTspice_GS66508B_L1V2.lib
+.lib UniversalOpamps2.sub
+.backanno
+.end
