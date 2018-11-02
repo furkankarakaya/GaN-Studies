@@ -256,4 +256,16 @@ iii) There is a relation between Id and Vgs,ext which says the current can be fo
 
 * One of the reasons that strong noise immunity and fast
 response are expected from **this protection circuit** is that it **uses the same references and supply voltages as the gate driver IC**, **avoiding the need for any isolation** between the sensed gate voltage and the comparator circuit.
+
+#### Awwad, A. E., & Dieckerhoff, S. (n.d.). Short-Circuit Evaluation and Overcurrent Protection for SiC Power MOSFETs Keywords Short-Circuit Behavior of SiC Power MOSFETs.
+
+* The short-circuit tests are conducted with the circuit given below.
+</br>![](images/ProtectionTestCircuit.jpg?raw=true)
+
+* The **stray inductance** and **thermal effects** need **to be considered** to describe the short circuit current characteristics
+
+* It is obvious that a **change of the external gate resistance** (in the example from Rg=12Ω to 90Ω) has only **a marginal impact on the peak short circuit current**. The **gate resistance determines** the time constant RgCeq at which the gate is charged, and hence influences the **di/dt** during the charging process.
+
+
+
 ## Application

@@ -1,37 +1,41 @@
 * D:\GitHub Repositories\GaN-Studies\Protection Circuits\ParasiticProtection.asc
 V1 N001 0 270
 R1 N005 N004 10
-R2 N012 N011 10
+R2 N016 N015 10
 L1 N004 N003 2e-9
-L2 N011 N010 2e-9
-V2 N003 N007 PULSE(-3 6 00e-9 1e-9 1e-9 400e-9 1000e-9)
-V3 N010 N014 PULSE(-3 6 0e-9 1e-9 1e-9 400e-9 1000e-9)
-Lparasitic Vpara 0 3e-9
-R3 Vfilter Vpara 2
-C1 Vfilter 0 22e-9
-V4 Vref 0 4
-V5 Vcc 0 5
+L2 N015 N014 2e-9
+V2 N003 N007 PULSE(6 -3 800e-9 1e-9 1e-9 1200e-9 2000e-9)
+V3 N014 Vgnd PULSE(-3 6 1000e-9 1e-9 1e-9 800e-9 2000e-9)
+Lparasitic Vcn N019 1.11e-9
 R4 N005 N006 2
 D1 N006 N004 D
-D2 N013 N011 D
-R5 N012 N013 2
-V6 Vee 0 -5
-XU3 Vfilter Vref Vcc Vee ParasResult level.2 Avol=1Meg GBW=100000Meg Slew=10000Meg ilimit=25m rail=0 Vos=0 phimargin=45 en=0 enk=0 in=0 ink=0 Rin=500Meg
-L4 N001 Vpos 30e-9
-C2 Vfilt2 Vpara 39e-12
-R6 Vpos Vfilt2 50k
-R7 Vpara Vfilt2 1k
-V7 Vref2 Vpara 4.3
-V8 Vcc2 Vpara 5
-V9 Vee2 Vpara -5
-I1 N008 0 20
-XU1 N005 Vpos N008 N007 GS66508B_L1V2
-XU2 N012 N008 Vpara N014 GS66508B_L1V2
-XU4 Vref2 Vfilt2 Vcc2 Vee2 DSVResult level.2 Avol=1Meg GBW=100000Meg Slew=10000Meg ilimit=25m rail=0 Vos=0 phimargin=45 en=0 enk=0 in=0 ink=0 Rin=500Meg
+D2 N018 N015 D
+R5 N016 N018 2
+L4 N001 N002 18e-9
+I1 N011 0 20
+XU1 N005 N002 N011 N007 GS66508B_L1V2
+XU2 N016 N011 Vcn Vgnd GS66508B_L1V2
+R8 N019 0 0.243e-3
+R9 Vcp 0 880
+C3 Vcn Vcp 1e-9
+XU3 Vcn N013 Vpos Vneg N017 level.2 Avol=1Meg GBW=3900Meg Slew=950Meg ilimit=25m rail=0 Vos=0 phimargin=45 en=0 enk=0 in=0 ink=0 Rin=500Meg
+XU4 Vcp N008 Vpos Vneg N009 level.2 Avol=1Meg GBW=3900Meg Slew=950Meg ilimit=25m rail=0 Vos=0 phimargin=45 en=0 enk=0 in=0 ink=0 Rin=500Meg
+XU5 N012 N010 Vpos Vneg Vamp level.2 Avol=1Meg GBW=3900Meg Slew=950Meg ilimit=25m rail=0 Vos=0 phimargin=45 en=0 enk=0 in=0 ink=0 Rin=500Meg
+V4 Vpos Vgnd 100
+V5 Vneg Vgnd -100
+R3 N013 N017 1k
+R6 N008 N013 2k
+R7 N009 N008 1k
+R10 N010 N009 1k
+R11 N012 N017 1k
+R12 Vamp N010 1k
+R13 Vgnd N012 1k
 .model D D
 .lib C:\Users\Furkan\Documents\LTspiceXVII\lib\cmp\standard.dio
-.tran 2e-6
-.option temp=25
+.tran 5e-6
+.option temp=125
+;ac dec 5 1 5000e6
+* For 155.5 x 155.5 mil trace (Source Pin Dimension)\n2 oz/ft^2 thickness\n \n25C - 0.243 mohm\n50C - 0.267 mohm\n75C - 0.29 mohm\n100C - 0.314 mohm\n125C - 0.338 mohm\n150C - 0.361 mohm\nL = 1.108404 nH
 .lib GaN_LTspice_GS66508B_L1V2.lib
 .lib UniversalOpamps2.sub
 .backanno
