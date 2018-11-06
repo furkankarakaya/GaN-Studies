@@ -1,9 +1,0 @@
-% Protection   
-
-Rpath = 1e-3;
-Lpath = 2.4e-9;
-C = 2.4e-9;
-Rc = 1e-3;
-
-G = tf([-1*Lpath -1*Rpath],[Lpath*C C*(Rpath + Rc) 1]);
-bode(G)
