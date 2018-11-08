@@ -16,10 +16,10 @@ I1 N011 0 20
 XU1 N005 N002 N011 N009 GS66508B_L1V2
 XU2 N014 N011 Vcp Vgnd GS66508B_L1V2
 R8 N016 0 0.243e-3
-R9 Vcn 0 4.5k
+R9 Vcn N017 2.2k
 C3 Vcp Vcn 1e-9
-V4 Vpos Vgnd 2
-V5 Vneg Vgnd -2
+V4 Vpos Vgnd 5
+V5 Vneg Vgnd -5
 R3 N008 N010 1k
 R6 N010 N007 1k
 R7 N007 Vgnd 10k
@@ -27,12 +27,18 @@ R10 N008 N007 220
 R11 Vamp N008 10k
 XU5 Vcn N007 Vpos Vneg N010 LT1813
 XU3 Vcp N008 Vpos Vneg Vamp LT1813
+C2 Vamp Vgnd 2.7p
+R18 Vamp Vgnd 1k
+R19 Vcn N017 {Rntc}
+R20 N017 0 2.74k
 .model D D
 .lib C:\Users\Furkan\Documents\LTspiceXVII\lib\cmp\standard.dio
 .tran 100e-6
-.option temp=25
+.option temp=125
 ;ac dec 5 1 5000e6
 * For 155.5 x 155.5 mil trace (Source Pin Dimension)\n2 oz/ft^2 thickness\n \n25C - 0.243 mohm\n50C - 0.267 mohm\n75C - 0.29 mohm\n100C - 0.314 mohm\n125C - 0.338 mohm\n150C - 0.361 mohm\nL = 1.108404 nH
+.param Rntc=10k*exp(B*(1/(temp + 273.5 )+1/(273.5+25)))
+.param B = 3455
 .lib GaN_LTspice_GS66508B_L1V2.lib
 .lib LTC.lib
 .backanno

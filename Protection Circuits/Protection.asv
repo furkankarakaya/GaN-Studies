@@ -1,0 +1,43 @@
+%% Protection   
+
+% Path Parameters
+Lpath = 1.11e-9;
+C = 1e-9;
+Rpath20 = 238e-6;
+T = 25:5:150;
+Rpath = Rpath20.*(1 + 0.004041.*(T-20));
+%plot(T,Rpath)
+
+% NTC Parameters
+Rntc25 = 10e3;
+B = 4000;
+Rntc = Rntc25 .* exp(B.*((1./(T+273.5))-(1/(25+273.5))));
+% plot(T,Rntc)
+
+% Equivalent Resistance
+i = 0;
+for Rparallel = 1e3:100:50e3
+i= i +1;
+Rseries = Lpath/C/243e-6 - Rparallel*Rntc25./(Rparallel + Rntc25); % Rseries in 25C
+Req = Rntc.*Rparallel./(Rntc+Rparallel) + Rseries;
+Delta(i) = max(Req.*Rpath)-min(Req.*Rpath);
+end
+
+[DVal, index] = min(Delta);
+Rparallel = 1e3 + ;
+Rseries = Lpath/C/243e-6 - Rparallel*Rntc25./(Rparallel + Rntc25); 
+Req = Rntc.*Rparallel./(Rntc+Rparallel) + Rseries;
+
+%% Bode Plots
+figure
+hold on
+for T = 25:50:125
+Rpath = Rpath20.*(1 + 0.004041.*(T-20));
+Rntc = Rntc25 .* exp(B.*((1./(T+273.5))-(1/(25+273.5))));
+Rc = Rseries + Rparallel*Rntc/(Rntc+Rparallel);
+G = tf([Lpath Rpath],[Lpath*C C*(Rpath + Rc) 1]);
+bode(G)
+end
+legend('25C','75C','125C')
+hold off
+
