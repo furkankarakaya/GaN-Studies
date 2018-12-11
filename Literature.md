@@ -268,4 +268,33 @@ response are expected from **this protection circuit** is that it **uses the sam
 
 
 
-## Application
+## Paralleling
+
+#### Lu, J. L., & Chen, D. (2017). Paralleling GaN E-HEMTs in 10kW-100kW systems. Conference Proceedings - IEEE Applied Power Electronics Conference and Exposition - APEC, 3049–3056. https://doi.org/10.1109/APEC.2017.7931131
+
+* The **main challenge for parallel** operation is thought to be
+the diverse **parasitics of the power stage and gate driver circuits**,
+which are very sensitive to the high di/dt and dv/dt.
+
+* As Vgs increase, **d(Id)/dt will start to affect Vgs via mutual loop** and power commutation loop as described in many previous works. **To minimize this effect, the Kelvin terminal is usually employed** in high-frequency applications to bypass the common source inductance.
+
+* However, **though the paralleled transistors will share the
+same gate driver chip and employ Kelvin connections in the design,
+d(Id)/dt could still potentially be problematic** due to the **existence of the quasi-common-source inductance**. The imbalanced quasi-common source inductance or di/dt will eventually cause a resultant feedback voltage across the Vgs.
+
+* On one hand, **the unbalanced quasi-common will help balance dynamic current distribution by lowering the transistor Vgs of higher transition speed**. On the other hand, the **feedback voltage might potentially cause overshoot or undamped ringing on Vgs**.
+
+* For layout design, it is **suggested to minimize and evenly distribute the quasi-common source inductance**, which is so critical that an unsynchronized gate driver circuit is proposed to solve unbalanced quasi-common source inductance issue.
+
+</br>![](images/EffectsofParasitics.png?raw=true)
+
+* According to the law of electromagnetic induction, with the **multi-layer magnetic-flux-canceling design strategy**, the parasitics of the trace could be greatly reduced – the direction of the commutation current on **two adjacent layers are opposite so that the generated flux outside the loop are canceling** each other.
+
+* Generally speaking, **in hard switching application, the more transistors we parallel, the higher switching loss we will have**.
+
+* **Parasitic capacitance of PCB and magnetic components is
+not ignorable** compared with the ultra-small Coss of GaN HEMT. The parasitic capacitance in a half bridge module is extracted by ANSYS Q3D as Figure 13, indicating **the parasitic capacitance in one leg is 0.6 nF (0.4 nF to BUS+ and 0.2 nF to BUS- node)**.
+
+</br>![](images/PCBParasiticCapacitance.png?raw=true)
+
+</br>![](images/DPT400V240A.png?raw=true)
