@@ -89,7 +89,32 @@ for lateral GaN devices, causing a temporary increase in ON-resistance that is p
 
 * The **threshold voltage** of most GaN devices is relatively **stable over temperature**.
 
+___
+#### M. Landel, S. Lefebvre, D. Labrousse, C. Gautier, F. Zaki, and Z. Khatir, “Dispersion of electrical characteristics and short-circuit robustness of 600V E-mode GaN transistors,” PCIM Eur. 2017 - Int. Exhib. Conf. Power Electron. Intell. Motion, Renew. Energy Energy Manag., no. May, pp. 16–18, 2017.
 
+* We begin with the **gate lag** phenomenon, which concerns rather traps behaviour under the gate. It can explain the dispersion of the threshold voltage.
+
+* There is a remarkable dispersion qualitatively and quantitatively. This is
+noticed on the time
+constants that **reflects dispersion in the traps activation energies, and also on their amplitude, which reflects dispersion in their density**. On the other hand, we notice a qualitative increase and/or decrease in each curve, which may **reveals the existence of traps in AlGaN and GaN layer simultaneously**. These traps may have contradictory effects on the 2DEG concentration whether they are located in GaN or AlGaN layer.
+
+* We performed the same study on the **drain lag.** To this end, we applied a drain voltage of 600 V in the OFF-State for 1 s and 1 V in the ON-State in order to activate the maximum of trap energy levels. In the following we present the transient currents that illustrate the dispersion between the components at the level of the drain traps.
+
+* We note a different behavior compared to the Gate Lag. **The current collapses at the beginning, due to the effect of
+the high
+voltage applied during the OFF-state**, which depletes totally the channel.
+
+* Also note that most devices may **take a very long time to return to their initial state**, **even** on this time scale, we find that
+**there are some
+devices that have not yet stabilized.**
+---
+#### R. Hou, J. Lu, and D. Chen, “An Ultrafast Discrete Short-Circuit Protection Circuit for GaN HEMTs,” pp. 1920–1925, 2018.,
+
+* One of the factors that yield **the saturation current reduction
+is due to the temperature-dependent transconductance in the 2DEG channel** of GaN HEMT. Clearly, with higher junction temperature, the saturation current gets lower.
+
+* The second factor that contributes to the saturation current
+reduction can be on the gate. It has been proven that **the fast increase of the temperature has an effect on the gate current** [9]. **With a higher temperature, the gate current becomes higher**. Therefore, it introduces **a larger voltage drop on the gate**. This can be another reason cause the saturation current reduction.
 ___
 ## Modelling
 
