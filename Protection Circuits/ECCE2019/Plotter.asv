@@ -1,0 +1,149 @@
+fplot = figure;
+figure(fplot)
+plot(time,ACapCurr,time,BCapCurr,time,CCapCurr,'Linewidth',3.0);
+ylim([-12 12]);
+xlim([0 20]);
+ax = gca;
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',12,'LineWidth', 1);
+ax.XTick = [0 5 10 15 20];
+ax.YTick = [-10 -5 0 5 10];
+legend('Phase A','Phase B','Phase C');
+xlabel('Time(ms)','FontSize',12);
+ylabel('Capacitor Current(A)','FontSize',12);
+
+%%
+fplot2 = figure;
+figure(fplot2)
+hold all;
+p1 = plot(time,ACapVolt,'Linewidth',3.0);
+p2 = plot(time,BCapVolt,'Linewidth',3.0);
+p3 = plot(time,CCapVolt,'Linewidth',3.0);
+p1.Color(4) = 1;
+p2.Color(4) = 1;
+p3.Color(4) = 1;
+ylim([268 273]);
+xlim([0 20]);
+ax = gca;
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',12,'LineWidth', 1);
+ax.XTick = [0 5 10 15 20];
+ax.YTick = [268 269 270 271 272 273];
+legend('Phase A','Phase B','Phase C');
+xlabel('Time(ms)','FontSize',12);
+ylabel('Capacitor Voltage(V)','FontSize',12);
+
+%% Cap Curr with and without comm inductances
+fplot2 = figure;
+figure(fplot2)
+hold all;
+p1 = plot(time,ACapCurrWithCommInductances,'Linewidth',2.0);
+p2 = plot(time,ACapCurrWithOnlyESL,'Linewidth',2.0);
+p1.Color(4) = 1;
+p2.Color(4) = 1;
+ylim([-12 12]);
+xlim([0 0.08]);
+ax = gca;
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',12,'LineWidth', 1);
+ax.XTick = [0 0.02 0.04 0.06 0.08];
+ax.YTick = [-10 -5 0 5 10];
+legend('With Comm. Ind.','Without Comm. Ind.');
+xlabel('Time(ms)','FontSize',12);
+ylabel('Capacitor Current(A)','FontSize',12);
+
+%% Cap Curr RMS with and without comm inductances
+fplot2 = figure;
+figure(fplot2)
+hold all;
+plot(time,ACapCurrRMSWithInd,'Linewidth',2.0);
+plot(time,BCapCurrRMSWithInd,'Linewidth',2.0);
+plot(time,CCapCurrRMSWithInd,'Linewidth',2.0);
+plot(time,ACapCurrRMSWithoutInd,'Linewidth',2.0,'Color','g');
+
+ylim([1 3]);
+xlim([0 20]);
+ax = gca;
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',12,'LineWidth', 1);
+ax.XTick = [0 5 10 15 20];
+ax.YTick = [1 1.5 2 2.5 3];
+legend('Phase A','Phase B','Phase C','Ideal','Location','best');
+xlabel('Time(ms)','FontSize',12);
+ylabel('Capacitor Current RMS(A)','FontSize',12);
+
+%% Series Connected with Interlaving Voltages
+fplot2 = figure;
+figure(fplot2)
+hold all;
+plot(time,Module1DCVolt,'Linewidth',2.0);
+plot(time,Module2DCVolt,'Linewidth',2.0);
+plot(time,DCBusVoltage/2,'Linewidth',2.0,'Color','g');
+ylim([268 273]);
+xlim([0 0.05]);
+ax = gca;
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',12,'LineWidth', 1);
+ax.YTick = [268 269 270 271 272 273];
+ax.XTick = [0 0.01 0.02 0.03 0.04 0.05];
+legend('Module 1','Module 2','DC Supply (x1/2)','Ideal','Location','best');
+xlabel('Time(ms)','FontSize',12);
+ylabel('Voltage (V)','FontSize',12);
+
+%% Paralel Connected Module Current Waveforms
+fplot2 = figure;
+figure(fplot2)
+hold all;
+plot(time,Module1CurrentNoIndNoInt,'Linewidth',2.0,'Color','m');
+plot(time,Module1CurrentNoIndYesInt,'Linewidth',2.0,'Color','r');
+plot(time,Module1CurrentYesIndYesInt,'Linewidth',2.0,'Color','g');
+plot(time,Module2CurrentYesIndYesInt,'Linewidth',2.0,'Color','b');
+
+
+ylim([-5 25]);
+xlim([0 0.05]);
+ax = gca;
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',12,'LineWidth', 1);
+ax.YTick = [-5 0 5 10 15 20 25];
+ax.XTick = [0 0.01 0.02 0.03 0.04 0.05];
+legend('Mod. 1 - Without Conn. Ind. and Without Interlaving',...
+    'Mod. 1 - Without Conn. Ind. and With Interlaving',...
+        'Mod. 1 - With Conn. Ind. and With Interlaving',...
+        'Mod. 2 - With Conn. Ind. and With Interlaving','Location','best');
+xlabel('Time(ms)','FontSize',12);
+ylabel('Current (A)','FontSize',12);
+
+%% Paralel Connected Module Voltage Waveforms
+fplot2 = figure;
+figure(fplot2)
+hold all;
+plot(time,ParallelModule1DCVolt,'Linewidth',2.0);
+plot(time,ParallelModule2DCVolt,'Linewidth',2.0);
+plot(time,ParallelDCBusVoltage,'Linewidth',2.0,'Color','g');
+ylim([269.5 271.5]);
+xlim([0 0.05]);
+ax = gca;
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',12,'LineWidth', 1);
+ax.YTick = [269.5 270 270.5 271 271.5];
+ax.XTick = [0 0.01 0.02 0.03 0.04 0.05];
+legend('Module 1','Module 2','DC Supply','Ideal','Location','best');
+xlabel('Time(ms)','FontSize',12);
+ylabel('Voltage (V)','FontSize',12);
+
+%% Paralel Connected Capacitor RMS Waveforms
+fplot2 = figure;
+figure(fplot2)
+hold all;
+plot(time,Module1CurrentNoIndNoInt,'Linewidth',2.0,'Color','m');
+plot(time,Module1CurrentNoIndYesInt,'Linewidth',2.0,'Color','r');
+plot(time,Module1CurrentYesIndYesInt,'Linewidth',2.0,'Color','g');
+plot(time,Module2CurrentYesIndYesInt,'Linewidth',2.0,'Color','b');
+
+
+ylim([-5 25]);
+xlim([0 0.05]);
+ax = gca;
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',12,'LineWidth', 1);
+ax.YTick = [-5 0 5 10 15 20 25];
+ax.XTick = [0 0.01 0.02 0.03 0.04 0.05];
+legend('Mod. 1 - Without Conn. Ind. and Without Interlaving',...
+    'Mod. 1 - Without Conn. Ind. and With Interlaving',...
+        'Mod. 1 - With Conn. Ind. and With Interlaving',...
+        'Mod. 2 - With Conn. Ind. and With Interlaving','Location','best');
+xlabel('Time(ms)','FontSize',12);
+ylabel('Current (A)','FontSize',12);

@@ -49,6 +49,14 @@ Rc = Rseries + Rparallel*Rntc/(Rntc+Rparallel);
 G = tf([Lpath Rpath],[Lpath*C C*(Rpath + Rc) 1]);
 bode(G)
 end
-legend('25C','75C','125C')
+set(findall(gcf,'type','line'),'linewidth',3)
+
+% ylim([-65 -85]);
+% xlim([0 20]);
+ax = gca;
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',12,'LineWidth', 1);
+% ax.XTick = [0 5 10 15 20];
+% ax.YTick = [-10 -5 0 5 10];
+legend('25{\circ}C','75{\circ}C','125{\circ}C','Location','best');
 hold off
 
