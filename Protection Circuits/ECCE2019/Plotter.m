@@ -113,16 +113,15 @@ ylabel('Current (A)','FontSize',12);
 fplot2 = figure;
 figure(fplot2)
 hold all;
-plot(time,ParallelModule1DCVolt,'Linewidth',2.0);
-plot(time,ParallelModule2DCVolt,'Linewidth',2.0);
-plot(time,ParallelDCBusVoltage,'Linewidth',2.0,'Color','g');
-ylim([269.5 271.5]);
+plot(time,DCBusVoltNoInt,'Linewidth',2.0);
+plot(time,DCBusVoltYesInt,'Linewidth',2.0);
+ylim([268 273]);
 xlim([0 0.05]);
 ax = gca;
 set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',12,'LineWidth', 1);
-ax.YTick = [269.5 270 270.5 271 271.5];
+ax.YTick = [268 269 270 271 272 273];
 ax.XTick = [0 0.01 0.02 0.03 0.04 0.05];
-legend('Module P1','Module P2','DC Supply','Ideal','Location','best');
+legend('No Interleaving','With Interleaving','Ideal','Location','best');
 xlabel('Time(ms)','FontSize',12);
 ylabel('Voltage (V)','FontSize',12);
 
