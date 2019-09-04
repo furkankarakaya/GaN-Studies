@@ -1,0 +1,195 @@
+$begin '$base_index$'
+  $begin 'properties'
+    all_levels=000000000000
+    time(year=000000002019, month=000000000003, day=000000000018, hour=000000000011, min=000000000033, sec=000000000026)
+    version=000000000000
+  $end 'properties'
+  $begin '$base_index$'
+    $index$(pos=000000004790, lin=000000000174, lvl=000000000000)
+  $end '$base_index$'
+$end '$base_index$'
+$begin 'SolutionBlock1'
+	ProductName=''
+	CircuitName='Q3DModel1'
+	VersionID=416
+	PostProcess=false
+	LossLess=true
+	NextUniqueID=478
+	MoveBackwards=false
+	$begin 'VariationIDs'
+		Map(V='', ID=407)
+	$end 'VariationIDs'
+	VersionID2=416
+	$begin 'InitialSurfaceMeshes'
+		SM(VID=407, Ver=416, Dir='DV407_V416_SM.imesh/')
+	$end 'InitialSurfaceMeshes'
+	$begin 'MI'
+		$begin 'SubData'
+			ID=56003
+			MI(VID=407, Ver=416, Dir='DV407_MI56003_V416.sd/')
+		$end 'SubData'
+	$end 'MI'
+$end 'SolutionBlock1'
+$begin 'BlockMapName'
+	FileHeader='SolutionBlock1'
+	'SolutionKey(SimSetup=6, Instance=\'\', Solution=-3, VersionID=416)'='SolutionBlock27'
+	'SolutionKey(SimSetup=6, Instance=\'SetupDefinition\', Solution=-1, VersionID=416)'='SolutionBlock26'
+	'SolutionKey(SimSetup=6, Instance=\'SolutionDefinition\', Solution=2, VersionID=416)'='SolutionBlock24'
+	'SolutionKey(SimSetup=6, Instance=\'SolutionDefinition\', Solution=9, VersionID=416)'='SolutionBlock25'
+$end 'BlockMapName'
+$begin 'SolutionBlock24'
+	SolutionName='AdaptivePass'
+	SolutionID=2
+	V=416
+	$begin 'States'
+		F(VID=407, Ver=416)
+	$end 'States'
+	$begin 'Definition'
+		SamplingInterpolation=false
+		Frequencies(100000000)
+		SolutionType=6
+		CenterFreq=0
+	$end 'Definition'
+	SweepID=-1
+	$begin 'MADCR'
+		$begin 'SubData'
+			ID=1
+			MADCR(VID=407, Ver=416, File='DV407_SOL2_MADCR1_V416.sd')
+		$end 'SubData'
+		$begin 'SubData'
+			ID=2
+			MADCR(VID=407, Ver=416, File='DV407_SOL2_MADCR2_V416.sd')
+		$end 'SubData'
+		$begin 'SubData'
+			ID=3
+			MADCR(VID=407, Ver=416, File='DV407_SOL2_MADCR3_V416.sd')
+		$end 'SubData'
+		$begin 'SubData'
+			ID=4
+			MADCR(VID=407, Ver=416, File='DV407_SOL2_MADCR4_V416.sd')
+		$end 'SubData'
+	$end 'MADCR'
+	$begin 'MACL'
+		$begin 'SubData'
+			ID=1
+			MACL(VID=407, Ver=416, File='DV407_SOL2_MACL1_V416.sd')
+		$end 'SubData'
+		$begin 'SubData'
+			ID=2
+			MACL(VID=407, Ver=416, File='DV407_SOL2_MACL2_V416.sd')
+		$end 'SubData'
+		$begin 'SubData'
+			ID=3
+			MACL(VID=407, Ver=416, File='DV407_SOL2_MACL3_V416.sd')
+		$end 'SubData'
+		$begin 'SubData'
+			ID=4
+			MACL(VID=407, Ver=416, File='DV407_SOL2_MACL4_V416.sd')
+		$end 'SubData'
+	$end 'MACL'
+$end 'SolutionBlock24'
+$begin 'SolutionBlock25'
+	SolutionName='LastAdaptive'
+	SolutionID=9
+	V=416
+	$begin 'States'
+		F(VID=407, Ver=416)
+	$end 'States'
+	$begin 'Definition'
+		SamplingInterpolation=false
+		Frequencies(100000000)
+		SolutionType=6
+		CenterFreq=0
+	$end 'Definition'
+	SweepID=-1
+	$begin 'MADCR'
+		$begin 'SubData'
+			ID=0
+			MADCR(VID=407, Ver=416, File='DV407_SOL9_MADCR0_V416.sd')
+		$end 'SubData'
+	$end 'MADCR'
+	$begin 'MACL'
+		$begin 'SubData'
+			ID=0
+			MACL(VID=407, Ver=416, File='DV407_SOL9_MACL0_V416.sd')
+		$end 'SubData'
+	$end 'MACL'
+	$begin 'ACSurfFields'
+		IDDblMap(463, 100000000)
+		$begin 'DataMap'
+			VID=407
+			Ver=416
+			ASF(DblID=463, Dir='DV407_SOL9_V416_F463_ASF/')
+		$end 'DataMap'
+	$end 'ACSurfFields'
+$end 'SolutionBlock25'
+$begin 'SolutionBlock26'
+	SimSetupID=6
+	SimSetupName='Setup1'
+	VersionID=416
+	SolveSetupID=0
+	$begin 'SU'
+	$end 'SU'
+	$begin 'SU'
+	$end 'SU'
+	$begin 'ACSurfCurrentPassNum'
+		'ACSurf.CP'(VID=407, Ver=416, P=4)
+	$end 'ACSurfCurrentPassNum'
+	$begin 'ACSurfCurrentMeshes'
+		'ASM.cmesh'(VID=407, Ver=416, Dir='DV407_S6_V416_ASM.cmesh/')
+	$end 'ACSurfCurrentMeshes'
+	$begin 'ACSurfAdpFiles'
+		IDDblMap(462, 1, 466, 2, 469, 3, 472, 4)
+		$begin 'DataMap'
+			VID=407
+			Ver=416
+			'ASM.ADP'(DblID=462, Dir='DV407_S6_V416_P462_ASM.ADP/')
+			'ASM.ADP'(DblID=466, Dir='DV407_S6_V416_P466_ASM.ADP/')
+			'ASM.ADP'(DblID=469, Dir='DV407_S6_V416_P469_ASM.ADP/')
+			'ASM.ADP'(DblID=472, Dir='DV407_S6_V416_P472_ASM.ADP/')
+		$end 'DataMap'
+	$end 'ACSurfAdpFiles'
+	$begin 'SU'
+	$end 'SU'
+	$begin 'ACRLastPassNumbers'
+		'ACR.LP'(VID=407, Ver=416, P=4)
+	$end 'ACRLastPassNumbers'
+	$begin 'ACLLastPassNumbers'
+		'ACL.LP'(VID=407, Ver=416, P=4)
+	$end 'ACLLastPassNumbers'
+	$begin 'Profiles'
+		PRF(VID=407, Ver=416, File='DV407_S6_V416.profile')
+	$end 'Profiles'
+	$begin 'MI'
+		$begin 'SubData'
+			ID=56003
+			MI(VID=407, Ver=416, Dir='DV407_S6_MI56003_V416.sd/')
+		$end 'SubData'
+	$end 'MI'
+$end 'SolutionBlock26'
+$begin 'SolutionBlock27'
+	$begin '56003'
+		ConvSetupName='ACRLConv'
+		MaxPasses='10'
+		MinPasses='1'
+		ConvTarget='1'
+		ConvTargetConsecPasses='N/A'
+		ConvCurrentConsecPasses='N/A'
+		c(tri=87671, p=1)
+		c(tri=113995, delta=10.9373, p=2)
+		c(tri=148195, delta=1.72897, p=3)
+		c(tri=192655, delta=0.780998, p=4)
+	$end '56003'
+$end 'SolutionBlock27'
+$begin '$index$'
+	$begin '$index$'
+		SolutionBlock27(pos=4443, lin=160, lvl=0)
+		BlockMapName(pos=862, lin=23, lvl=0)
+		SolutionBlock24(pos=1334, lin=30, lvl=0)
+		SolutionBlock25(pos=2515, lin=81, lvl=0)
+		SolutionBlock26(pos=3252, lin=116, lvl=0)
+		SolutionBlock1(pos=370, lin=1, lvl=0)
+		$base_index$(pos=0, lin=1, lvl=0)
+		$index$(pos=4790, lin=174, lvl=0)
+	$end '$index$'
+$end '$index$'

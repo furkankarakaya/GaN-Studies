@@ -1,0 +1,4 @@
+-(10 + 1/(280e-9) * idt(V(vind) - V(vtr),1)) / (D(V(vind) - V(vtr))/D(time) + 10 / (280e-9) * (V(Vind) - V(vtr)))
+
+
+V(pay)/(D(V(Vind,Vtr))/D(time)+10/280e-9*V(Vind,Vtr))

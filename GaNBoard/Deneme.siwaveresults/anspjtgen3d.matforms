@@ -1,0 +1,9 @@
+B_MATERIAL_PROPERTY_FORMULAS_MOD_GEN
+  2
+  EDB_air
+   1.0006+0*ln((2.53303e+22+Freq*Freq)/(2.53303e+22+Freq*Freq))
+   0+0*Freq*(atan(Freq/1.59155e+11)-atan(Freq/1.59155e+11))
+  EDB_FR4_epoxy
+   4.11483+0.0281238*ln((2.53303e+22+Freq*Freq)/(4.95658e+09+Freq*Freq))
+   0+3.1292e-12*Freq*(atan(Freq/70403)-atan(Freq/1.59155e+11))
+E_MATERIAL_PROPERTY_FORMULAS_MOD_GEN
