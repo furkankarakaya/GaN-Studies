@@ -11,35 +11,38 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./main.obj" \
-"./sources_v100/F2837xD_CodeStartBranch.obj" \
-"./sources_v100/F2837xD_CpuTimers.obj" \
-"./sources_v100/F2837xD_DefaultISR.obj" \
-"./sources_v100/F2837xD_Dma.obj" \
-"./sources_v100/F2837xD_ECap.obj" \
-"./sources_v100/F2837xD_EPwm.obj" \
-"./sources_v100/F2837xD_EQep.obj" \
-"./sources_v100/F2837xD_GlobalVariableDefs.obj" \
-"./sources_v100/F2837xD_Gpio.obj" \
-"./sources_v100/F2837xD_I2C.obj" \
-"./sources_v100/F2837xD_Ipc.obj" \
-"./sources_v100/F2837xD_Ipc_Driver.obj" \
-"./sources_v100/F2837xD_Ipc_Driver_Lite.obj" \
-"./sources_v100/F2837xD_Ipc_Driver_Util.obj" \
-"./sources_v100/F2837xD_Mcbsp.obj" \
-"./sources_v100/F2837xD_Pbist.obj" \
-"./sources_v100/F2837xD_PieCtrl.obj" \
-"./sources_v100/F2837xD_PieVect.obj" \
-"./sources_v100/F2837xD_Sci.obj" \
-"./sources_v100/F2837xD_Spi.obj" \
-"./sources_v100/F2837xD_SysCtrl.obj" \
-"./sources_v100/F2837xD_TempSensorConv.obj" \
-"./sources_v100/F2837xD_Upp.obj" \
-"./sources_v100/F2837xD_sci_io.obj" \
-"./sources_v100/F2837xD_sdfm_drivers.obj" \
-"./sources_v100/F2837xD_struct.obj" \
-"./sources_v100/F2837xD_usDelay.obj" \
-"../2837x_FLASH_lnk_cpu1.cmd" \
-"../F2837x_Headers_nonBIOS_cpu1.cmd" \
+"./source_v210/F2837xD_Adc.obj" \
+"./source_v210/F2837xD_CodeStartBranch.obj" \
+"./source_v210/F2837xD_CpuTimers.obj" \
+"./source_v210/F2837xD_DBGIER.obj" \
+"./source_v210/F2837xD_DefaultISR.obj" \
+"./source_v210/F2837xD_Dma.obj" \
+"./source_v210/F2837xD_ECap.obj" \
+"./source_v210/F2837xD_EPwm.obj" \
+"./source_v210/F2837xD_EQep.obj" \
+"./source_v210/F2837xD_Emif.obj" \
+"./source_v210/F2837xD_GlobalVariableDefs.obj" \
+"./source_v210/F2837xD_Gpio.obj" \
+"./source_v210/F2837xD_I2C.obj" \
+"./source_v210/F2837xD_Ipc.obj" \
+"./source_v210/F2837xD_Ipc_Driver.obj" \
+"./source_v210/F2837xD_Ipc_Driver_Lite.obj" \
+"./source_v210/F2837xD_Ipc_Driver_Util.obj" \
+"./source_v210/F2837xD_Mcbsp.obj" \
+"./source_v210/F2837xD_PieCtrl.obj" \
+"./source_v210/F2837xD_PieVect.obj" \
+"./source_v210/F2837xD_Sci.obj" \
+"./source_v210/F2837xD_Spi.obj" \
+"./source_v210/F2837xD_SysCtrl.obj" \
+"./source_v210/F2837xD_TempSensorConv.obj" \
+"./source_v210/F2837xD_Upp.obj" \
+"./source_v210/F2837xD_can.obj" \
+"./source_v210/F2837xD_sci_io.obj" \
+"./source_v210/F2837xD_sdfm_drivers.obj" \
+"./source_v210/F2837xD_struct.obj" \
+"./source_v210/F2837xD_usDelay.obj" \
+"../2837xD_FLASH_lnk_cpu1.cmd" \
+"../F2837xD_Headers_nonBIOS_cpu1.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
 
@@ -51,9 +54,9 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
--include sources_v100/subdir_vars.mk
+-include source_v210/subdir_vars.mk
 -include subdir_rules.mk
--include sources_v100/subdir_rules.mk
+-include source_v210/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -184,9 +187,9 @@ Deneme1.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "sources_v100\F2837xD_CodeStartBranch.obj" "sources_v100\F2837xD_CpuTimers.obj" "sources_v100\F2837xD_DefaultISR.obj" "sources_v100\F2837xD_Dma.obj" "sources_v100\F2837xD_ECap.obj" "sources_v100\F2837xD_EPwm.obj" "sources_v100\F2837xD_EQep.obj" "sources_v100\F2837xD_GlobalVariableDefs.obj" "sources_v100\F2837xD_Gpio.obj" "sources_v100\F2837xD_I2C.obj" "sources_v100\F2837xD_Ipc.obj" "sources_v100\F2837xD_Ipc_Driver.obj" "sources_v100\F2837xD_Ipc_Driver_Lite.obj" "sources_v100\F2837xD_Ipc_Driver_Util.obj" "sources_v100\F2837xD_Mcbsp.obj" "sources_v100\F2837xD_Pbist.obj" "sources_v100\F2837xD_PieCtrl.obj" "sources_v100\F2837xD_PieVect.obj" "sources_v100\F2837xD_Sci.obj" "sources_v100\F2837xD_Spi.obj" "sources_v100\F2837xD_SysCtrl.obj" "sources_v100\F2837xD_TempSensorConv.obj" "sources_v100\F2837xD_Upp.obj" "sources_v100\F2837xD_sci_io.obj" "sources_v100\F2837xD_sdfm_drivers.obj" "sources_v100\F2837xD_struct.obj" "sources_v100\F2837xD_usDelay.obj" 
-	-$(RM) "main.d" "sources_v100\F2837xD_CpuTimers.d" "sources_v100\F2837xD_DefaultISR.d" "sources_v100\F2837xD_Dma.d" "sources_v100\F2837xD_ECap.d" "sources_v100\F2837xD_EPwm.d" "sources_v100\F2837xD_EQep.d" "sources_v100\F2837xD_GlobalVariableDefs.d" "sources_v100\F2837xD_Gpio.d" "sources_v100\F2837xD_I2C.d" "sources_v100\F2837xD_Ipc.d" "sources_v100\F2837xD_Ipc_Driver.d" "sources_v100\F2837xD_Ipc_Driver_Lite.d" "sources_v100\F2837xD_Ipc_Driver_Util.d" "sources_v100\F2837xD_Mcbsp.d" "sources_v100\F2837xD_Pbist.d" "sources_v100\F2837xD_PieCtrl.d" "sources_v100\F2837xD_PieVect.d" "sources_v100\F2837xD_Sci.d" "sources_v100\F2837xD_Spi.d" "sources_v100\F2837xD_SysCtrl.d" "sources_v100\F2837xD_TempSensorConv.d" "sources_v100\F2837xD_Upp.d" "sources_v100\F2837xD_sci_io.d" "sources_v100\F2837xD_sdfm_drivers.d" "sources_v100\F2837xD_struct.d" 
-	-$(RM) "sources_v100\F2837xD_CodeStartBranch.d" "sources_v100\F2837xD_usDelay.d" 
+	-$(RM) "main.obj" "source_v210\F2837xD_Adc.obj" "source_v210\F2837xD_CodeStartBranch.obj" "source_v210\F2837xD_CpuTimers.obj" "source_v210\F2837xD_DBGIER.obj" "source_v210\F2837xD_DefaultISR.obj" "source_v210\F2837xD_Dma.obj" "source_v210\F2837xD_ECap.obj" "source_v210\F2837xD_EPwm.obj" "source_v210\F2837xD_EQep.obj" "source_v210\F2837xD_Emif.obj" "source_v210\F2837xD_GlobalVariableDefs.obj" "source_v210\F2837xD_Gpio.obj" "source_v210\F2837xD_I2C.obj" "source_v210\F2837xD_Ipc.obj" "source_v210\F2837xD_Ipc_Driver.obj" "source_v210\F2837xD_Ipc_Driver_Lite.obj" "source_v210\F2837xD_Ipc_Driver_Util.obj" "source_v210\F2837xD_Mcbsp.obj" "source_v210\F2837xD_PieCtrl.obj" "source_v210\F2837xD_PieVect.obj" "source_v210\F2837xD_Sci.obj" "source_v210\F2837xD_Spi.obj" "source_v210\F2837xD_SysCtrl.obj" "source_v210\F2837xD_TempSensorConv.obj" "source_v210\F2837xD_Upp.obj" "source_v210\F2837xD_can.obj" "source_v210\F2837xD_sci_io.obj" "source_v210\F2837xD_sdfm_drivers.obj" "source_v210\F2837xD_struct.obj" "source_v210\F2837xD_usDelay.obj" 
+	-$(RM) "main.d" "source_v210\F2837xD_Adc.d" "source_v210\F2837xD_CpuTimers.d" "source_v210\F2837xD_DefaultISR.d" "source_v210\F2837xD_Dma.d" "source_v210\F2837xD_ECap.d" "source_v210\F2837xD_EPwm.d" "source_v210\F2837xD_EQep.d" "source_v210\F2837xD_Emif.d" "source_v210\F2837xD_GlobalVariableDefs.d" "source_v210\F2837xD_Gpio.d" "source_v210\F2837xD_I2C.d" "source_v210\F2837xD_Ipc.d" "source_v210\F2837xD_Ipc_Driver.d" "source_v210\F2837xD_Ipc_Driver_Lite.d" "source_v210\F2837xD_Ipc_Driver_Util.d" "source_v210\F2837xD_Mcbsp.d" "source_v210\F2837xD_PieCtrl.d" "source_v210\F2837xD_PieVect.d" "source_v210\F2837xD_Sci.d" "source_v210\F2837xD_Spi.d" "source_v210\F2837xD_SysCtrl.d" "source_v210\F2837xD_TempSensorConv.d" "source_v210\F2837xD_Upp.d" "source_v210\F2837xD_can.d" "source_v210\F2837xD_sci_io.d" "source_v210\F2837xD_sdfm_drivers.d" "source_v210\F2837xD_struct.d" 
+	-$(RM) "source_v210\F2837xD_CodeStartBranch.d" "source_v210\F2837xD_DBGIER.d" "source_v210\F2837xD_usDelay.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

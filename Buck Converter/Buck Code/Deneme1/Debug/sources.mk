@@ -112,5 +112,5 @@ PDE_DEPS__QUOTED :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 . \
-sources_v100 \
+source_v210 \
 

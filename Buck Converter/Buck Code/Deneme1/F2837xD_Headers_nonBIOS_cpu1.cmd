@@ -16,7 +16,10 @@ MEMORY
    ADCD          : origin = 0x007580, length = 0x000080
 
    ANALOG_SUBSYS : origin = 0x05D180, length = 0x000080
-   
+
+   CANA          : origin = 0x048000, length = 0x000800
+   CANB          : origin = 0x04A000, length = 0x000800
+
    CLA1          : origin = 0x001400, length = 0x000040     /* CLA registers */
 
    CLB_XBAR      : origin = 0x007A40, length = 0x000040
@@ -37,9 +40,6 @@ MEMORY
    DACA          : origin = 0x005C00, length = 0x000010
    DACB          : origin = 0x005C10, length = 0x000010
    DACC          : origin = 0x005C20, length = 0x000010
-   
-   DCANA         : origin = 0x048000, length = 0x001000		/* DCAN A Registers */
-   DCANB         : origin = 0x04A000, length = 0x001000		/* DCAN B Registers */
 
    DMA          : origin = 0x001000, length = 0x000200
    DMACLASRCSEL : origin = 0x007980, length = 0x000040
@@ -50,7 +50,7 @@ MEMORY
    ECAP4        : origin = 0x005060, length = 0x000020     /* Enhanced Capture 4 registers */
    ECAP5        : origin = 0x005080, length = 0x000020     /* Enhanced Capture 5 registers */
    ECAP6        : origin = 0x0050A0, length = 0x000020     /* Enhanced Capture 6 registers */
-   
+
    EMIF1        : origin = 0x047000, length = 0x000800
    EMIF2        : origin = 0x047800, length = 0x000800
 
@@ -71,20 +71,21 @@ MEMORY
    EPWM11       : origin = 0x004A00, length = 0x000100     /* Enhanced PWM 11 registers */
    EPWM12       : origin = 0x004B00, length = 0x000100     /* Enhanced PWM 12 registers */
 
-   EPWM_XBAR  	: origin = 0x007A00, length = 0x000040
+   EPWM_XBAR    : origin = 0x007A00, length = 0x000040
 
-   FLASH_CTRL   : origin = 0x05F800, length = 0x000300
-   FLASH_ECC    : origin = 0x05FB00, length = 0x000040
+   FLASH0_CTRL  : origin = 0x05F800, length = 0x000300
+   FLASH0_ECC   : origin = 0x05FB00, length = 0x000040
 
    GPIOCTRL     : origin = 0x007C00, length = 0x000180     /* GPIO control registers */
    GPIODAT      : origin = 0x007F00, length = 0x000030     /* GPIO data registers */
 
-   GPIO_OUT_XBAR : origin = 0x007A80, length = 0x000040
-   HWBIST       : origin = 0x05E000, length = 0x000100     /* HWBIST registers */
+   OUTPUT_XBAR  : origin = 0x007A80, length = 0x000040
    I2CA         : origin = 0x007300, length = 0x000040     /* I2C-A registers */
    I2CB         : origin = 0x007340, length = 0x000040     /* I2C-B registers */
 
-   IPC          : origin = 0x050000, length = 0x001000
+   IPC          : origin = 0x050000, length = 0x000024
+
+   FLASHPUMPSEMAPHORE   : origin = 0x050024, length = 0x000002
 
    ROMPREFETCH  : origin = 0x05E608, length = 0x000002
 
@@ -94,7 +95,7 @@ MEMORY
    ACCESSPROTECTION  : origin = 0x05F4C0, length = 0x000040     /* Access Protection registers */
    MEMORYERROR  : origin = 0x05F500, length = 0x000040     /* Access Protection registers */
    ROMWAITSTATE : origin = 0x05F540, length = 0x000002     /* ROM Config registers */
-   
+
 
    MCBSPA       : origin = 0x006000, length = 0x000040     /* McBSP-A registers */
    MCBSPB       : origin = 0x006040, length = 0x000040     /* McBSP-A registers */
@@ -103,14 +104,13 @@ MEMORY
 
    PIE_CTRL     : origin = 0x000CE0, length = 0x000020     /* PIE control registers */
    PIE_VECT     : origin = 0x000D00, length = 0x000200     /* PIE Vector Table */
-   PBIST        : origin = 0x05E200, length = 0x000200     /* PBIST registers */
    SCIA         : origin = 0x007200, length = 0x000010     /* SCI-A registers */
    SCIB         : origin = 0x007210, length = 0x000010     /* SCI-B registers */
    SCIC         : origin = 0x007220, length = 0x000010     /* SCI-C registers */
    SCID         : origin = 0x007230, length = 0x000010     /* SCI-D registers */
-   
-   SDFM1		: origin = 0x005E00, length = 0x000080	   /* Sigma delta 1 registers */
-   SDFM2		: origin = 0x005E80, length = 0x000080	   /* Sigma delta 2 registers */
+
+   SDFM1        : origin = 0x005E00, length = 0x000080     /* Sigma delta 1 registers */
+   SDFM2        : origin = 0x005E80, length = 0x000080     /* Sigma delta 2 registers */
 
    SPIA         : origin = 0x006100, length = 0x000010
    SPIB         : origin = 0x006110, length = 0x000010
@@ -123,17 +123,19 @@ MEMORY
    CLK_CFG     : origin = 0x05D200, length = 0x000100
    CPU_SYS     : origin = 0x05D300, length = 0x000100
 
-   TRIG         : origin = 0x007900, length = 0x000050
+   INPUT_XBAR   : origin = 0x007900, length = 0x000020
+   XBAR         : origin = 0x007920, length = 0x000020
+   SYNC_SOC     : origin = 0x007940, length = 0x000010
    WD           : origin = 0x007000, length = 0x000040
 
    XINT         : origin = 0x007070, length = 0x000010
-                
+
    DCSM_Z1      : origin = 0x05F000, length = 0x000030     /* Zone 1 Dual code security module registers */
    DCSM_Z2      : origin = 0x05F040, length = 0x000030     /* Zone 2 Dual code security module registers */
    DCSM_COMMON  : origin = 0x05F070, length = 0x000010     /* Common Dual code security module registers */
 
-   DCSM_OTP_Z1  : origin = 0x078800, length = 0x000020     /* Part of Z1 OTP.  LinkPointer/JTAG lock/ Boot Mode */
-   DCSM_OTP_Z2  : origin = 0x078900, length = 0x000020     /* Part of Z2 OTP.  LinkPointer/JTAG lock */
+   DCSM_Z1_OTP  : origin = 0x078000, length = 0x000020     /* Part of Z1 OTP.  LinkPointer/JTAG lock/ Boot Mode */
+   DCSM_Z2_OTP  : origin = 0x078200, length = 0x000020     /* Part of Z2 OTP.  LinkPointer/JTAG lock */
 }
 
 
@@ -162,12 +164,15 @@ SECTIONS
    AdccRegsFile          : > ADCC,         PAGE = 1
    AdcdRegsFile          : > ADCD,         PAGE = 1
 
-   AnalogSubsysRegsFile : > ANALOG_SUBSYS, PAGE = 1
-   
-   Cla1RegsFile          : > CLA1,         PAGE = 1
-   Cla1SoftIntRegsFile   : > PIE_CTRL, 	   PAGE = 1, type=DSECT
+   AnalogSubsysRegsFile  : > ANALOG_SUBSYS, PAGE = 1
 
-   ClbXbarRegsFile      : > CLB_XBAR     PAGE = 1
+   CanaRegsFile          : > CANA,         PAGE = 1
+   CanbRegsFile          : > CANB,         PAGE = 1
+
+   Cla1RegsFile          : > CLA1,         PAGE = 1
+   Cla1SoftIntRegsFile   : > PIE_CTRL,     PAGE = 1, type=DSECT
+
+   ClbXbarRegsFile       : > CLB_XBAR     PAGE = 1
 
    Cmpss1RegsFile        : > CMPSS1,      PAGE = 1
    Cmpss2RegsFile        : > CMPSS2,      PAGE = 1
@@ -185,16 +190,14 @@ SECTIONS
    DacaRegsFile          : > DACA          PAGE = 1
    DacbRegsFile          : > DACB          PAGE = 1
    DaccRegsFile          : > DACC          PAGE = 1
-   
-   DcanaRegsFile		 : > DCANA,		   PAGE = 1
-   DcanbRegsFile		 : > DCANB,		   PAGE = 1
 
-   DcsmRegsZ1File		 : > DCSM_Z1,		   PAGE = 1
-   DcsmRegsZ2File		 : > DCSM_Z2,		   PAGE = 1
-   DcsmRegsCommonFile		 : > DCSM_COMMON,	   PAGE = 1
+   DcsmZ1RegsFile        : > DCSM_Z1,          PAGE = 1
+   DcsmZ2RegsFile        : > DCSM_Z2,          PAGE = 1
+   DcsmCommonRegsFile    : > DCSM_COMMON,      PAGE = 1
 
-   DcsmOtpZ1File		 : > DCSM_OTP_Z1,	   PAGE = 1
-   DcsmOtpZ2File		 : > DCSM_OTP_Z2,	   PAGE = 1
+   /*** Warning:  Only remove "Type = NOLOAD" to program OTP Locations ***/
+   DcsmZ1OtpFile         : > DCSM_Z1_OTP,      PAGE = 1, type = NOLOAD
+   DcsmZ2OtpFile         : > DCSM_Z2_OTP,      PAGE = 1, type = NOLOAD
 
    DmaRegsFile           : > DMA           PAGE = 1
    DmaClaSrcSelRegsFile  : > DMACLASRCSEL  PAGE = 1
@@ -205,7 +208,7 @@ SECTIONS
    ECap4RegsFile         : > ECAP4,        PAGE = 1
    ECap5RegsFile         : > ECAP5,        PAGE = 1
    ECap6RegsFile         : > ECAP6,        PAGE = 1
-   
+
    Emif1RegsFile         : > EMIF1         PAGE = 1
    Emif2RegsFile         : > EMIF2         PAGE = 1
 
@@ -228,20 +231,23 @@ SECTIONS
    EQep2RegsFile         : > EQEP2,        PAGE = 1
    EQep3RegsFile         : > EQEP3,        PAGE = 1
 
-   FlashCtrlRegsFile     : > FLASH_CTRL    PAGE = 1
-   FlashEccRegsFile      : > FLASH_ECC     PAGE = 1
+   Flash0CtrlRegsFile     : > FLASH0_CTRL    PAGE = 1
+   Flash0EccRegsFile      : > FLASH0_ECC     PAGE = 1
 
    GpioCtrlRegsFile      : > GPIOCTRL,     PAGE = 1
    GpioDataRegsFile      : > GPIODAT,      PAGE = 1
 
-   GpioOutXbarRegsFile   : > GPIO_OUT_XBAR     PAGE = 1
-   HwbistRegsFile        : > HWBIST        PAGE = 1
-   I2caRegsFile          : > I2CA,         PAGE = 1
-   I2cbRegsFile          : > I2CB,         PAGE = 1
-   IpcRegsFile           : > IPC,          PAGE = 1
+   OutputXbarRegsFile    : > OUTPUT_XBAR    PAGE = 1
+   I2caRegsFile          : > I2CA,          PAGE = 1
+   I2cbRegsFile          : > I2CB,          PAGE = 1
+   InputXbarRegsFile     : > INPUT_XBAR     PAGE = 1
+   XbarRegsFile          : > XBAR           PAGE = 1
+   IpcRegsFile           : > IPC,           PAGE = 1
+
+   FlashPumpSemaphoreRegsFile   : > FLASHPUMPSEMAPHORE,    PAGE = 1
 
    RomPrefetchRegsFile       : > ROMPREFETCH,       PAGE = 1
-   MemCfgRegsFile        : > MEMCFG,       PAGE = 1
+   MemCfgRegsFile            : > MEMCFG,            PAGE = 1
    Emif1ConfigRegsFile       : > EMIF1CONFIG,       PAGE = 1
    Emif2ConfigRegsFile       : > EMIF2CONFIG,       PAGE = 1
    AccessProtectionRegsFile  : > ACCESSPROTECTION,  PAGE = 1
@@ -251,19 +257,18 @@ SECTIONS
    McbspaRegsFile        : > MCBSPA,       PAGE = 1
    McbspbRegsFile        : > MCBSPB,       PAGE = 1
 
-   UppRegsFile           : > UPP,       PAGE = 1
+   UppRegsFile           : > UPP,          PAGE = 1
 
    NmiIntruptRegsFile    : > NMIINTRUPT,   PAGE = 1
-   PbistRegsFile         : > PBIST,        PAGE = 1
    PieCtrlRegsFile       : > PIE_CTRL,     PAGE = 1
 
    SciaRegsFile          : > SCIA,         PAGE = 1
    ScibRegsFile          : > SCIB,         PAGE = 1
    ScicRegsFile          : > SCIC,         PAGE = 1
    ScidRegsFile          : > SCID,         PAGE = 1
-   
-   Sdfm1RegsFile		 : > SDFM1,		   PAGE = 1
-   Sdfm2RegsFile		 : > SDFM2,		   PAGE = 1
+
+   Sdfm1RegsFile         : > SDFM1,        PAGE = 1
+   Sdfm2RegsFile         : > SDFM2,        PAGE = 1
 
    SpiaRegsFile          : > SPIA,        PAGE = 1
    SpibRegsFile          : > SPIB,        PAGE = 1
@@ -274,13 +279,12 @@ SECTIONS
    ClkCfgRegsFile        : > CLK_CFG,     PAGE = 1
    CpuSysRegsFile        : > CPU_SYS,     PAGE = 1
 
-   TrigRegsFile          : > TRIG,         PAGE = 1
+   SyncSocRegsFile       : > SYNC_SOC,    PAGE = 1
 
    WdRegsFile            : > WD,           PAGE = 1
 
-
    XintRegsFile          : > XINT          PAGE = 1
-   MemCfgRegs		     : > MEMCFG        PAGE = 1
+   MemCfgRegs            : > MEMCFG        PAGE = 1
 
 }
 
