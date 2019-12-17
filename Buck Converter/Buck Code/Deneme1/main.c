@@ -1,3 +1,10 @@
+/*
+ * Furkan Karakaya - Middle East Technical University
+ * furkan.karakaya@metu.edu.tr
+ * Two phase interleaved bi-directional step-down converter
+ * Thesis Study
+ */
+
 #include <F2837xD_Device.h>
 #include <math.h>
 #include <F2837xD_Pie_defines.h>
@@ -13,13 +20,18 @@ __interrupt void xint2_isr(void);
 __interrupt void xint3_isr(void);
 __interrupt void xint4_isr(void);
 __interrupt void epwm3_tzint_isr(void);
+__interrupt void adca2_isr(void);
+__interrupt void adcb2_isr(void);
+
 
 void InitEpwm1(); // PWM1
 void InitEpwm2(); // PWM2
 void InitEpwm3(); // PWM3
+void InitEpwm4(); // PWM4 for ADC
 void HardTurnOFF(void);
 void SoftTurnOFF(void);
-
+void ConfigureADC(void);
+void SetupADCEpwm(void);
 
 extern void GPIO_SetupXINT4Gpio(Uint16);
 
@@ -36,7 +48,7 @@ extern void GPIO_SetupXINT4Gpio(Uint16);
 #define CHARGER GPIO0 // Class A
 #define FREEWHEEL GPIO1 // Class A
 
-
+#define RESULTS_BUFFER_SIZE 256
 #define sysclk_frequency    200000000   // Hz
 #define sysclk_period       5               // ns
 #define pwmclk_frequency    200000000   // Hz
@@ -44,8 +56,31 @@ extern void GPIO_SetupXINT4Gpio(Uint16);
 #define PI                  3.141592654
 #define switching_frequency 500000           // Hz
 #define dead_time           100             // ns
+#define sample_window       65          // clock
+#define adc_frequency       50000000    //ns
+#define adc_period          200         //ns
 
-#define BUCK 1; // BUCK or DPT
+#define SCTEST 1; // BUCK or DPT or SCTEST
+
+// Global Variables
+Uint16 AdcaResults[RESULTS_BUFFER_SIZE];
+Uint16 resultsIndex;
+volatile Uint16 bufferFull;
+volatile Uint16 AdcCurr1;
+volatile Uint16 AdcCurr2;
+volatile Uint16 AdcVin;
+volatile Uint16 AdcVout;
+volatile float Vout;
+volatile float Vin;
+volatile float Curr1;
+volatile float Curr2;
+
+float VoltsPerBit = 0.00004577637;
+float CurrSensorSensitivity = 30.3030303;
+float VinpGain = 195.9868743;
+float VoutGain = 147.6634885;
+
+
 void GpioSelect(void);
 
 
@@ -66,7 +101,7 @@ int main(void)
 
     EALLOW;
     CpuSysRegs.PCLKCR0.bit.TBCLKSYNC = 0;   /*disable epwm clock to initialize epwm modules*/
-    CpuSysRegs.PCLKCR0.bit.GTBCLKSYNC =0;
+    CpuSysRegs.PCLKCR0.bit.GTBCLKSYNC = 0;
     EDIS;
 
     EALLOW;
@@ -89,6 +124,8 @@ int main(void)
     PieVectTable.TIMER1_INT = &cpu_timer1_isr;
     PieVectTable.TIMER2_INT = &cpu_timer2_isr;
     PieVectTable.EPWM3_TZ_INT = &epwm3_tzint_isr;
+    PieVectTable.ADCA2_INT = &adca2_isr;
+    PieVectTable.ADCB2_INT = &adcb2_isr;
     EDIS;
 
 
@@ -97,15 +134,15 @@ int main(void)
     PieCtrlRegs.PIEIER12.bit.INTx1 = 1; //for XINT3
     PieCtrlRegs.PIEIER12.bit.INTx2 = 1; //for XINT4
     PieCtrlRegs.PIEIER2.bit.INTx3 = 1; // for TZ of EPWM3
+    PieCtrlRegs.PIEIER10.bit.INTx2 = 1; // for ADCA2
+    PieCtrlRegs.PIEIER10.bit.INTx6 = 1; // for ADCB2
 
     IER |= M_INT1;
     IER |= M_INT2; // For TZ Int. of EPWM3
+    IER |= M_INT10; // For ADC Int.
     IER |= M_INT12;
     IER |= M_INT13;
     IER |= M_INT14;
-
-    EINT;  // Enable Global interrupt INTM
-    ERTM;  // Enable Global realtime interrupt DBGM
 
 
     GpioSelect();
@@ -125,25 +162,56 @@ int main(void)
     InitEpwm1();
     InitEpwm2();
     InitEpwm3();
+
+    ConfigureADC(); // Configure ADC and power it up
+    InitEpwm4(); // Initialize ePWM4
+    SetupADCEpwm();
+
+    EINT;  // Enable Global interrupt INTM
+    ERTM;  // Enable Global realtime interrupt DBGM
+
+    //
+    // Initialize results buffer
+    //
+    for(resultsIndex = 0; resultsIndex < RESULTS_BUFFER_SIZE; resultsIndex++)
+    {
+        AdcaResults[resultsIndex] = 0;
+    }
+    resultsIndex = 0;
+    bufferFull = 0;
+    AdcCurr1 = 0;
+
     EALLOW;
-#ifdef DPT
-    CpuSysRegs.PCLKCR2.bit.EPWM1 = 1;
-#endif
+    #ifdef BUCK
+        CpuSysRegs.PCLKCR2.bit.EPWM1 = 1;
+    #endif
     CpuSysRegs.PCLKCR2.bit.EPWM2 = 1;
     CpuSysRegs.PCLKCR2.bit.EPWM3 = 1;
     CpuSysRegs.PCLKCR0.bit.TBCLKSYNC = 1;   /*enable epwm clock to initialize epwm modules*/
     CpuSysRegs.PCLKCR0.bit.GTBCLKSYNC =1;
     EDIS;
 
+        //
+    EPwm4Regs.ETSEL.bit.SOCAEN = 1;  //enable SOCA
+    EPwm4Regs.TBCTL.bit.CTRMODE = 0; //unfreeze, and enter up count mode
+
+        //
+        //wait while ePWM causes ADC conversions, which then cause interrupts,
+        //which fill the results buffer, eventually setting the bufferFull
+
     while(1)
     {
 
     }
-
 }
+
+
+
+
 
 __interrupt void epwm3_tzint_isr(void)
 {
+    asm(" RPT #40 || NOP");
     HardTurnOFF();
     int i = 0;
     GpioDataRegs.GPBSET.bit.LED2 = 1;
@@ -182,6 +250,17 @@ __interrupt void xint3_isr(void)
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
 
     #endif
+
+    #ifdef SCTEST
+        GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
+        GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
+        GpioDataRegs.GPASET.bit.CHARGER = 1;
+        GpioDataRegs.GPASET.bit.FREEWHEEL = 1;
+        asm(" RPT #16 || NOP");
+        GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
+        GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
+    #endif
+
     GpioDataRegs.GPDTOGGLE.bit.LED1 = 1;
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP12;
 }
@@ -292,6 +371,12 @@ GpioCtrlRegs.GPAPUD.bit.GPIO1 = 1;    // Disable pull-up on GPIO1 (EPWM1B)
     GpioCtrlRegs.GPAMUX1.bit.GPIO1 = 1;   // Configure GPIO1 as EPWM1B
 #endif
 #ifdef DPT
+    GpioCtrlRegs.GPADIR.bit.GPIO0 = 1;
+    GpioCtrlRegs.GPADIR.bit.GPIO1 = 1;
+    GpioDataRegs.GPACLEAR.bit.GPIO0 = 1;
+    GpioDataRegs.GPACLEAR.bit.GPIO1 = 1;
+#endif
+#ifdef SCTEST
     GpioCtrlRegs.GPADIR.bit.GPIO0 = 1;
     GpioCtrlRegs.GPADIR.bit.GPIO1 = 1;
     GpioDataRegs.GPACLEAR.bit.GPIO0 = 1;
@@ -467,6 +552,68 @@ void InitEpwm3(void)
 
 }
 
+
+
+void InitEpwm4(void)
+{
+    // after enabling the ePWM clock
+    EALLOW;
+    EPwm4Regs.ETSEL.bit.SOCAEN = 0;
+    EPwm4Regs.ETSEL.bit.SOCASEL = 4;
+    EPwm4Regs.ETPS.bit.SOCAPRD = 1;
+    EPwm4Regs.CMPA.bit.CMPA = (3*sample_window - 1)/2;
+    EPwm4Regs.TBPRD = 3*sample_window;
+    EPwm4Regs.TBCTL.bit.CTRMODE = 3; // freeze counter
+    EDIS;
+}
+
+void ConfigureADC(void)
+{
+    EALLOW;
+    AdcaRegs.ADCCTL2.bit.PRESCALE = 6;
+    AdcSetMode(ADC_ADCA, ADC_RESOLUTION_16BIT, ADC_SIGNALMODE_DIFFERENTIAL);
+    AdcaRegs.ADCCTL1.bit.INTPULSEPOS = 1; // Set pulse pos. to late
+    AdcaRegs.ADCCTL1.bit.ADCPWDNZ = 1; // Power up ADC block
+    DELAY_US(1000);
+
+    AdcbRegs.ADCCTL2.bit.PRESCALE = 6;
+    AdcSetMode(ADC_ADCB, ADC_RESOLUTION_16BIT, ADC_SIGNALMODE_DIFFERENTIAL);
+    AdcbRegs.ADCCTL1.bit.INTPULSEPOS = 1; // Set pulse pos. to late
+    AdcbRegs.ADCCTL1.bit.ADCPWDNZ = 1; // Power up ADC block
+    DELAY_US(1000);
+    EDIS;
+}
+
+void SetupADCEpwm()
+{
+
+    EALLOW;
+    AdcaRegs.ADCSOC0CTL.bit.CHSEL = 0;  //SOC0 will convert (ADCINA0 - ADCINA1)
+    AdcaRegs.ADCSOC0CTL.bit.ACQPS = sample_window; // 1.1MSPS -> 909 ns sampling window -> 910ns/5ns = 182 -> acqps = 182 - 1
+    AdcaRegs.ADCSOC0CTL.bit.TRIGSEL = 11; // ePWM4 for Trig Signal
+    AdcaRegs.ADCSOC1CTL.bit.CHSEL = 2;  //SOC1 will convert (ADCINA2 - ADCINA3)
+    AdcaRegs.ADCSOC1CTL.bit.ACQPS = sample_window; // 1.1MSPS -> 909 ns sampling window -> 910ns/5ns = 182 -> acqps = 182 - 1
+    AdcaRegs.ADCSOC1CTL.bit.TRIGSEL = 11; // ePWM4 for Trig Signal
+    AdcaRegs.ADCSOC2CTL.bit.CHSEL = 4;  //SOC2 will convert (ADCINA4 - ADCINA5)
+    AdcaRegs.ADCSOC2CTL.bit.ACQPS = sample_window; // 1.1MSPS -> 909 ns sampling window -> 910ns/5ns = 182 -> acqps = 182 - 1
+    AdcaRegs.ADCSOC2CTL.bit.TRIGSEL = 11; // ePWM4 for Trig Signal
+
+    AdcaRegs.ADCINTSEL1N2.bit.INT2SEL = 0; // end of SOC2 will set INT2 flag
+    AdcaRegs.ADCINTSEL1N2.bit.INT2E = 1; // enable INT2 flag
+    AdcaRegs.ADCINTFLGCLR.bit.ADCINT2 = 1; // re-clear the flag
+    // It is assumed all channels will be sampled in 910 nsec in order. Therefore, the results registers can be read after EOC2 signal./
+    AdcbRegs.ADCSOC0CTL.bit.CHSEL = 4; //SOC2 will convert (ADCINB4 - ADCINB5)
+    AdcbRegs.ADCSOC0CTL.bit.ACQPS = sample_window; // 1.1MSPS -> 909 ns sampling window -> 910ns/5ns = 182 -> acqps = 182 - 1
+    AdcbRegs.ADCSOC0CTL.bit.TRIGSEL = 11; // ePWM4 for Trig Signal
+
+    AdcbRegs.ADCINTSEL1N2.bit.INT2SEL = 0; // end of SOC0 will set INT2 flag
+    AdcbRegs.ADCINTSEL1N2.bit.INT2E = 1; // enable INT2 flag
+    AdcbRegs.ADCINTFLGCLR.bit.ADCINT2 = 1; // re-clear the flag
+
+    // For removing the offset or for flagging high/low threshold PPB block can be configured accordingly
+    EDIS;
+
+}
 void HardTurnOFF(void)
 {
     // Disable Gate Drivers
@@ -474,10 +621,38 @@ void HardTurnOFF(void)
       GpioDataRegs.GPBCLEAR.bit.EN1 = 1;
 
       EPwm2Regs.CMPA.bit.CMPA = EPwm2Regs.TBPRD + 1;
+#ifdef BUCK
       EPwm1Regs.CMPA.bit.CMPA = EPwm1Regs.TBPRD + 1;
+#endif
+#ifdef DPT
+      GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
+      GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
+#endif
+#ifdef SCTEST
+      GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
+      GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
+#endif
 }
 
 void SoftTurnOFF(void)
 {
 
 }
+
+interrupt void adca2_isr(void)
+{
+    Curr1 = (AdcaResultRegs.ADCRESULT0*VoltsPerBit - 1.5) * CurrSensorSensitivity;
+    Curr2 = (AdcaResultRegs.ADCRESULT1*VoltsPerBit - 1.5) * CurrSensorSensitivity;
+    Vin = (AdcaResultRegs.ADCRESULT2*VoltsPerBit - 1.5) * VinpGain;
+    Vout = (AdcaResultRegs.ADCRESULT2*VoltsPerBit - 1.5) * VoutGain;
+    AdcaRegs.ADCINTFLGCLR.bit.ADCINT2 = 1; //clear INT2 flag
+    PieCtrlRegs.PIEACK.all = PIEACK_GROUP10;
+}
+interrupt void adcb2_isr(void)
+{
+    AdcVout = AdcbResultRegs.ADCRESULT0;
+    AdcbRegs.ADCINTFLGCLR.bit.ADCINT2 = 1; //clear INT2 flag
+    PieCtrlRegs.PIEACK.all = PIEACK_GROUP10;
+}
+
+
