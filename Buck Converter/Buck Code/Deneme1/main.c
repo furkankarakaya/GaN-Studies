@@ -260,10 +260,10 @@ __interrupt void xint3_isr(void)
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
         GpioDataRegs.GPASET.bit.CHARGER = 1;
         GpioDataRegs.GPASET.bit.FREEWHEEL = 1;
-        asm(" RPT #6 || NOP");
+        asm(" RPT #100 || NOP");
         GpioDataRegs.GPASET.bit.GPIO4 = 1;
         GpioDataRegs.GPASET.bit.GPIO5 = 1;
-        asm(" RPT #12 || NOP");
+        asm(" RPT #200 || NOP");
         GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
         asm(" RPT #2000 || NOP");
