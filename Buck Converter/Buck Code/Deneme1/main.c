@@ -234,10 +234,14 @@ __interrupt void xint4_isr(void)
 __interrupt void xint3_isr(void)
 {
     #ifdef DPT
+    int i = 0;
         GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
         GpioDataRegs.GPASET.bit.CHARGER = 1;
-        asm(" RPT #200 || NOP");
+        for (i = 0; i < 10; ++i)
+        {
+            asm(" RPT #200 || NOP");
+        }
         GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
         asm(" RPT #20 || NOP");
         GpioDataRegs.GPASET.bit.FREEWHEEL = 1;
@@ -248,7 +252,7 @@ __interrupt void xint3_isr(void)
         asm(" RPT #30 || NOP");
         GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
-
+        asm(" RPT #2000 || NOP");
     #endif
 
     #ifdef SCTEST
@@ -256,9 +260,15 @@ __interrupt void xint3_isr(void)
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
         GpioDataRegs.GPASET.bit.CHARGER = 1;
         GpioDataRegs.GPASET.bit.FREEWHEEL = 1;
-        asm(" RPT #16 || NOP");
+        asm(" RPT #100 || NOP");
+        GpioDataRegs.GPASET.bit.GPIO4 = 1;
+        GpioDataRegs.GPASET.bit.GPIO5 = 1;
+        asm(" RPT #200 || NOP");
         GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
+        asm(" RPT #2000 || NOP");
+        GpioDataRegs.GPACLEAR.bit.GPIO4 = 1;
+        GpioDataRegs.GPACLEAR.bit.GPIO5 = 1;
     #endif
 
     GpioDataRegs.GPDTOGGLE.bit.LED1 = 1;
@@ -390,14 +400,32 @@ GpioCtrlRegs.GPAPUD.bit.GPIO1 = 1;    // Disable pull-up on GPIO1 (EPWM1B)
     GpioCtrlRegs.GPAMUX1.bit.GPIO3 = 1;   // Configure GPIO3 as EPWM2B
 
 
+#ifdef SCTEST
+    GpioCtrlRegs.GPAPUD.bit.GPIO4 = 1;
+    GpioCtrlRegs.GPAPUD.bit.GPIO5 = 1;
+    GpioCtrlRegs.GPADIR.bit.GPIO4 = 1;
+    GpioCtrlRegs.GPADIR.bit.GPIO5 = 1;
+    GpioDataRegs.GPACLEAR.bit.GPIO4 = 1;
+    GpioDataRegs.GPACLEAR.bit.GPIO5 = 1;
+#endif
 
+#ifdef BUCK
     GpioCtrlRegs.GPAPUD.bit.GPIO4 = 1;    // Disable pull-up on GPIO4 (EPWM3A)
     GpioCtrlRegs.GPAPUD.bit.GPIO5 = 1;    // Disable pull-up on GPIO5 (EPWM3B)
     GpioCtrlRegs.GPAGMUX1.bit.GPIO4 = 0;  // Configure GPIO2 as EPWM3A
     GpioCtrlRegs.GPAGMUX1.bit.GPIO5 = 0;  // Configure GPIO3 as EPWM3B
     GpioCtrlRegs.GPAMUX1.bit.GPIO4 = 1;   // Configure GPIO2 as EPWM3A
     GpioCtrlRegs.GPAMUX1.bit.GPIO5 = 1;   // Configure GPIO3 as EPWM3B
+#endif
 
+#ifdef DPT
+    GpioCtrlRegs.GPAPUD.bit.GPIO4 = 1;    // Disable pull-up on GPIO4 (EPWM3A)
+    GpioCtrlRegs.GPAPUD.bit.GPIO5 = 1;    // Disable pull-up on GPIO5 (EPWM3B)
+    GpioCtrlRegs.GPAGMUX1.bit.GPIO4 = 0;  // Configure GPIO2 as EPWM3A
+    GpioCtrlRegs.GPAGMUX1.bit.GPIO5 = 0;  // Configure GPIO3 as EPWM3B
+    GpioCtrlRegs.GPAMUX1.bit.GPIO4 = 1;   // Configure GPIO2 as EPWM3A
+    GpioCtrlRegs.GPAMUX1.bit.GPIO5 = 1;   // Configure GPIO3 as EPWM3B
+#endif
 // Over-current Protection GPIOs
     GpioCtrlRegs.GPAPUD.bit.OCP1 = 0; // Pull up is not disabled
     GpioCtrlRegs.GPADIR.bit.OCP1 = 0;
@@ -511,6 +539,7 @@ void InitEpwm2(void)
 
 void InitEpwm3(void)
 {
+
     EALLOW;
     EPwm3Regs.TZSEL.bit.OSHT1 = 1;
     EPwm3Regs.TZSEL.bit.OSHT2 = 1;
