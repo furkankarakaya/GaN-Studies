@@ -4,6 +4,7 @@
 *.msh
 *.raw
 Weekly Reports/~$2019.09.04 - 2019.09.11 Report.pptx
+<<<<<<< HEAD
 Buck Converter/Buck Code/LaptopCode/F2837xD_Headers_nonBIOS_cpu1.cmd
 Buck Converter/Buck Code/LaptopCode/2837xD_FLASH_lnk_cpu1.cmd
 Buck Converter/Buck Code/LaptopCode/.project
@@ -88,3 +89,40 @@ Buck Converter/Buck Code/Laptop-Code/.settings/org.eclipse.core.resources.prefs
 Buck Converter/Buck Code/Laptop-Code/.settings/org.eclipse.cdt.debug.core.prefs
 Buck Converter/Buck Code/Laptop-Code/.settings/org.eclipse.cdt.codan.core.prefs
 Buck Converter/Buck Code/Laptop-Code/.launches/Laptop-Code.launch
+=======
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/ccsObjs.opt
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/control_board_v0.2_dock.map
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/control_board_v0.2_dock.out
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/control_board_v0.2_dock_linkInfo.xml
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/main.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/makefile
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/objects.mk
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources.mk
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/subdir_rules.mk
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/subdir_vars.mk
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_CpuTimers.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_DefaultISR.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_Dma.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_ECap.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_EPwm.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_EQep.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_GlobalVariableDefs.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_Gpio.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_hwbist.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_I2C.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_Ipc.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_Mcbsp.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_Pbist.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_PieCtrl.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_PieVect.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_Sci.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_sci_io.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_sdfm_drivers.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_Spi.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_struct.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_SysCtrl.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_TempSensorConv.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_Upp.d
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/subdir_rules.mk
+Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/subdir_vars.mk
+>>>>>>> 36da3877e94238faf15f0e8054fd651b56f0c3bc
