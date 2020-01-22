@@ -126,3 +126,4 @@ Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/F2837xD_U
 Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/subdir_rules.mk
 Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/subdir_vars.mk
 >>>>>>> 36da3877e94238faf15f0e8054fd651b56f0c3bc
+*.fig
