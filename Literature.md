@@ -115,6 +115,12 @@ is due to the temperature-dependent transconductance in the 2DEG channel** of Ga
 
 * The second factor that contributes to the saturation current
 reduction can be on the gate. It has been proven that **the fast increase of the temperature has an effect on the gate current** [9]. **With a higher temperature, the gate current becomes higher**. Therefore, it introduces **a larger voltage drop on the gate**. This can be another reason cause the saturation current reduction.
+
+___
+#### G. Mishemts et al., “Short-Circuit Study in Medium-Voltage GaN,” vol. 64, no. 11, pp. 9012–9022, 2017. 10.1109/TIE.2017.2719599
+
+*  The **main problems of the available GaN cascodes** are related to **its packaging**, which, in combination with control and power loop inductances, is responsible for the observed gate ringing. **Under a SC event** in a real application, this **ringing could lead to the device destruction** or converter failure, even after withstanding such an electrical stress. In this regard, gate bipolar control and reducing loop inductances could assist to improve cascodes SC ruggedness. Moreover, the **low thermal self-regulation** on their gate control **makes them less rugged than EHEMTs to SC events**. However, **GaN cascodes present an inherent pn- junction structure at the Si MOSFET, which can be used as a free-wheeling diode with a significantly lower forward voltage** (integral diode +DHEMT) drop than EHEMTs. This is of interest for synchronous rectification, e.g., power inverters for motor driving. As another benefit, **GaN cascodes can be controlled using traditional VG values**.
+
 ___
 ## Modelling
 
@@ -291,7 +297,87 @@ response are expected from **this protection circuit** is that it **uses the sam
 
 * It is obvious that a **change of the external gate resistance** (in the example from Rg=12Ω to 90Ω) has only **a marginal impact on the peak short circuit current**. The **gate resistance determines** the time constant RgCeq at which the gate is charged, and hence influences the **di/dt** during the charging process.
 
+* The **parasitic method shows a faster detection time than the desaturation method**. The larger delay in the desaturation method is mainly due to the junction capacitance of the DDESAT and its reverse recovery characteristics [10-12].
 
+* The desaturation method shows a higher fault response time compared to the parasitics technique. Using the parasitics method, the maximum fault current is reduced by around 20%.
+___
+#### G. Mishemts et al., “Short-Circuit Study in Medium-Voltage GaN,” vol. 64, no. 11, pp. 9012–9022, 2017. 10.1109/TIE.2017.2719599
+
+* **EHEMTs** have the main drawback of **overheating under operating** conditions, which **decrease the µ(T) and degrades RDS(on)** . Fortunately, **this thermal behavior is beneficial for their SC ruggedness**, as a self-regulation process on ID takes place.
+
+* The figure given below SC ruggedness of different type of transistors.
+</br>![](images/SC_Durability.jpg?raw=true)
+
+----
+#### B. Huang, Y. Li, T. Q. Zheng, and Y. Zhang, “Design of overcurrent protection circuit for GaN HEMT,” in 2014 IEEE Energy Conversion Congress and Exposition, ECCE 2014, 2014, pp. 2844–2848.
+
+* From the table we can know, the **gate threshold voltage of the device is just 1.4V, which is far below the silicon power MOSFET’s**, which leads to **an easier conduction false**. Its **parasitic capacitors**, which include input capacitor (Ciss) and output capacitor (Coss), **are also smaller than the silicon power MOSFET**, so as to realize higher switching speed and smaller switching loss.
+
+* Commonly there are **two methods to detect the drain current**. **First**, we can **cascade a very small resistance R** on the GaN HEMT, and the voltage of the resistance is VR (VR ?I? ·R). By detecting the voltage of the resistance, it can realize the judgment of the overcurrent fault.  **Second**, we can **detect the drain-source voltage of GaN HEMT** V?? to realize the detection of its drain current I?.
+
+* **Vds change more obvious compared with VR**
+
+----
+#### X. Lyu, H. Li, Y. Abdullah, and K. Wang, “A Reliable Ultra-Fast Short Circuit Protection Method for E-mode GaN HEMT,”, IEEE Transactions on Power Electronics, vol. 8993, no. c, 2020.
+
+* The figure given below SC ruggedness of different type of transistors. E-HEMTs are able to survive longer than 10us under less than 350V.
+</br>![](images/SC_Durability2.jpg?raw=true)
+
+* **Under the short circuit conditio**, the monitored phase-leg **voltage** (Vplv) **will show a sudden dip** due to the parasitic inductance in the power loop and a high di/dt. When the sudden voltage dip is detected, the fault trigger flag will be set.
+
+* A conventional desaturation detection circuit is deployed to confirm the short circuit fault and slowly turns off the device.
+
+* Generally, **the amplitude of the phase-leg voltage under fault condition is higher than that under heavy load switching**. Specifically, there is noticeable amplitude difference between these two voltages at the frequency band **between 3 MHz and 50 MHz**.
+</br>![](images/SC_Frequency.jpg?raw=true)
+
+* For the gate loop PCB layout, **small gate loop is preferred** to reduce gate voltage noise and prevent false turn-on during the switching transients. Also, there should be **no trace overlap between the primary side and secondary side**. For the **high side switch gate drive, the CMTI of the power supply, isolator and isolated gate driver needs to be at least 100 V/ns**. The barrier capacitance is preferred to be in few pico-farads.
+
+----
+#### K. Sun, J. Wang, R. Burgos, D. Boroyevich, Y. Kang, and E. Choi, “Analysis and design of an overcurrent protection scheme based on parasitic inductance of SiC MOSFET power module,” Conf. Proc. - IEEE Appl. Power Electron. Conf. Expo. - APEC, vol. 2018-March, pp. 2806–2812, 2018.
+
+* However, since **these current sensing methods** are not designed specifically for short circuit protection, they usually have problems of hard to integrate, **not enough current range or not enough bandwidth** for short circuit detection.
+
+* In addition, the **I-V curve of SiC MOSFET is more temperature dependent** compared to that of Si IGBT, which **makes DeSat an unpractical method for SiC MOSFET** short circuit protection under a wide temperature range.
+
+* The **impedance of the Rs and Cs** branch should be **much larger than the parasitic inductor** Lp branch **so that** this short circuit protection scheme **will not affect the normal operation of the switch** as shown in equation
+
+----
+#### J. Acuna, J. Walter, I. Kallfass, and G. N. Gan, “Very Fast Short Circuit Protection for Gallium-Nitride Power Transistors Based on Printed Circuit Board Integrated Current Sensor Keywords,” pp. 1–10.
+
+* (Desaturation) can be used without a special transistor package but **requires a blanking time**, which **limits the speed of the short-circuit detection** under Hard Switch Fault (HSF) type of faults, an issue which is critical for GaN transistors
+
+* This paper investigates the use of a **PCB-integrated current sensor** to perform a very fast short circuit detection especially dedicated to GaN power transistors. Two different short circuit detection methods were implemented using the integrated current sensor, **neither of these methods uses a blanking time nor require a special transistor or special package**.
+
+----
+#### R. Hou and J. Lu, “An ultrafast discrete protection circuit utilizing multi-functional dual-gate pads of GaN HEMTs,” 2019 IEEE Energy Convers. Congr. Expo. ECCE 2019, pp. 818–823, 2019.
+
+* In this paper, the discrete protection circuit is applied to the GaN HEMT by utilizing the GaNPX® dual-gate pads structure. By doing so, **it can keep the conventional, straightforward gate driver loop layout of GaN** and also provide the flexibility in terms of power loop layout. In other words, depending on the specific PCB system structure, **system designers can choose to place the protection circuit either on the same side of the gate driver or the opposite side to the gate driver**.
+
+* Fig. 4 shows the hard switch-on peak currents under 400 V with different load currents. **If the load current is around 4 A, the peak current on the device can be 7 times higher to the load current**. Therefore, it is important to **guarantee the protection circuit will not be mis-triggered** during this normal peak current transient
+</br>![](images/CurrentOvershoot.jpg?raw=true)
+
+* Therefore, **the diode is preferred to have relatively small reverse recovery**. In addition, during this transition, the **parasitic capacitance of the diode also needs to be charged**. Thus, **to reduce the capacitance value, it is also desired to have two of these diodes in series**.
+
+----
+#### K. Wang et al., “A Reliable Short-Circuit Protection Method with Ultra-Fast Detection for GaN based Gate Injection Transistors,” in 2019 IEEE 7th Workshop on Wide Bandgap Power Devices and Applications (WiPDA), 2019, vol. 0, pp. 43–46.
+
+* This paper presents a new short-circuit protection method developed for Gallium Nitride (GaN) gate injection
+transistors **(GITs)**.
+
+* **Reducing the gate current** during a short circuit fault **helps to lower the short circuit energy**, extend the short circuit survive device time, and prevent degradation.
+
+* The **de-saturation detection** has been widely used for protection against short circuit events for its reliability. Due to the **relatively long blanking time**, its total protection time is usually **within a range of microseconds**.
+
+* The **proposed three-step short-circuit protection method** is based on an **ultra-fast fault detection**, followed by the **active gate current clamping**, and the **de-saturation protection confirmation**. The proposed detection **method utilizes the effect of the short circuit event’s high di/dt on the stray inductance** in the power loop.
+
+* Compared to a normal operation condition, the **di/dt during short-circuit faults is usually larger**. Thus, the
+**amplitude of the resulting voltage dip under the short-circuit conditions can be differentiated from normal conditions**. The voltage dip occurs as soon as the short-circuit fault occurs, and then the voltage is gradually damped as the decoupling capacitor provides the energy for the short circuit current.
+----
+#### R. Hou, J. Lu, and D. Chen, “An Ultrafast Discrete Short-Circuit Protection Circuit for GaN HEMTs,” 2018 IEEE Energy Convers. Congr. Expo. ECCE 2018, pp. 1920–1925, 2018.
+
+* The **traditional SCP/OCP methods** can be summarized as below, 1) integrated **de-saturation detection** in gate-driver; 2) current **sense resistor**; 3) **di/dt detection by voltage sensing across common source inductance** [10]-[12]. However, the **delay time for the traditional integrated de-saturation detection** in gate-driver is typically about 2.5 μs, which might be slow for GaN HEMT; The current **sense resistor will add additional parasitic inductance** into the power circuit, which will affect the switching performance; The **voltage sensing across common source inductance is not practical** for GaN, as the stray inductance in the circuit must be minimized.
+
+* Clearly, **with higher junction temperature, the saturation current gets lower**. The second factor that contributes to the saturation current reduction can be on the gate. It has been proven that the **fast increase of the temperature has an effect on the gate current** [9]. With a higher temperature, the **gate current becomes higher**. Therefore, **it introduces a larger voltage drop on the gate**. This can be another reason cause the saturation current reduction.
 
 ## Paralleling
 
