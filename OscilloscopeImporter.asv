@@ -1,6 +1,6 @@
 
 %Vsense100af = lowpass(Vsense100a,45e6,5e9);
-to = 10000;
+to = 8000;
 from = 1500;
 
 figure
@@ -9,9 +9,9 @@ hold all
 plot(2e-10*(from:to), VrcoutSCP350(from:to),'LineWidth',1.5)
 plot(2e-10*(from:to), VrefDPT350(from:to),'LineWidth',1.5)
 plot(2e-10*(from:to), VrcoutDPT350(from:to),'LineWidth',1.5)
-legend('Rcout(SCP)','Ref(DPT)','Rcout(DPT)')
+legend('SCP','Ref(DPT)','DPT')
 ylabel('Voltage (V)')
 xlabel('time (\mus)')
-title('Comparison of SCP and DPT under 350V(10R-1nF)')
+title('Filtered induced voltage under DPT (10R-1nF)')
 
 

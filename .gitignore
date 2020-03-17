@@ -129,3 +129,52 @@ Buck Converter/Buck Code/Deneme1/control_board_v0.2_dock/Debug/sources/subdir_va
 *.fig
 *.dat
 *.mat
+*.lock
+*.siw
+*.semaphore
+*.asol
+*.asol_priv
+*.fct
+*.profile
+*.adp
+*.sd
+*.g3derr
+*.ngmesh
+Protection Circuits/TPEL Letter/FEA/gökhan/PCB.aedtresults/PCB_simple.results/DV120_SOL78_V143.Field169/FieldData
+*.blo
+*.hdr
+*.hlo
+*.sat
+*.shd
+*.sls
+*.sol
+*.spt
+*.sstr
+*.sstr_ac
+*.str
+*.str_ac
+*.stt
+Protection Circuits/TPEL Letter/FEA/gökhan/PCB.aedtresults/PCB_simple_blocksforvia.results/DV511_SOL78_V911.Field439/FieldData
+Protection Circuits/TPEL Letter/FEA/gökhan/PCB.aedtresults/PCB_simple_blocksforvia.results/DV511_SOL78_V934.Field439/FieldData
+*.be
+*.bw3Dprofiles
+*.bwmodels
+*.cmdline
+*.coaxPorts
+*.config
+*.matforms
+*.noPorts
+*.options
+*.pents
+*.pinGroupInfo
+*.rlcVias
+*.sbmodels
+*.vplate
+*.pwg
+*.pxt
+*.sel
+*.anf
+*.bo
+*.pec
+*.txt
+Protection Circuits/TPEL Letter/FEA.zip
