@@ -1,0 +1,216 @@
+\documentclass[chaparabic,ee,ms,12pt,oneandhalf]{metu}
+\usepackage{appendix}
+\usepackage{longtable}
+\usepackage[pdftex]{hyperref}
+\usepackage[all]{hypcap}
+\usepackage{todonotes}
+
+\graphicspath{ {./figures/} }
+
+\usepackage[figuresright]{rotating}
+\usepackage{xy} 
+\usepackage{booktabs}
+\usepackage{pifont}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{pdfpages}
+\usepackage{array}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{lastpage}
+\usepackage{afterpage}
+\usepackage{lipsum}
+\usepackage{adjustbox}
+\usepackage{rotating}
+
+
+% \usepackage{graphicx}
+\usepackage{amsmath,amssymb} % define this before the line numbering.
+% \usepackage{ruler}
+\usepackage{color}
+% \usepackage{cite}
+% \usepackage[utf8x]{inputenc}
+% \usepackage{footnote}
+% \makesavenoteenv{tabular}
+% \makesavenoteenv{table}
+
+\renewcommand{\sectionautorefname}{\S}
+\renewcommand{\subsectionautorefname}{\S}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\captionsetup{belowskip=12pt,aboveskip=8pt}
+\newcommand{\tab}{\hspace*{2em}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{textcomp}
+\usepackage{subcaption}
+
+
+\usepackage{tikz}
+\usepackage{mathtools}
+% \usepackage{rotating}
+%\PassOptionsToPackage{figuresright}{rotating}
+\usetikzlibrary{shapes,arrows} % HIU added
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\HIU}[1]{\textcolor{red}{[HIU: #1]}}
+\newcommand{\BULLET}[1]{\textcolor{blue}{- #1}}
+\newcommand{\hide}[1]{}
+\newcommand{\etal}{{et al. }}
+\pdfstringdefDisableCommands{\let\uppercase\relax}
+
+\hyphenation{learn-ing}
+\hyphenation{sec-tion}
+
+% Name and Surname
+\author{}
+% Thesis Title English and Turkish
+\title{}
+\turkishtitle{}
+
+\date{September 2020}
+ 
+% prof : Prof. Dr.
+% assocprof : Assoc. Prof. Dr.
+% assistprof : Assist. Prof. Dr.
+% dr : Dr.
+%
+% Director of Institute
+\director[prof]{}
+% Head of Department
+\headofdept[prof]{}
+%
+% Supervisor : English and Turkish
+\supervisor[assocprof]{}
+% \turkishsupervisor{  } %if you will hard-code the academic title
+%
+% Affiliation of Supervisor in English and possibly in Turkish
+\departmentofsupervisor{Electrical and Electronics Engineering, METU}
+
+\cosupervisor[]{}
+\departmentofcosupervisor{}
+%
+% Committee Members
+% In general members are sorted according to their academic titles
+%
+% Proffesors (1)
+% Associate Professors (2)
+% Assistant Professors (3)
+% Other (4)
+% 
+% IMPORTANT:  All affiliatons should fit in a single line
+% If affiliation line is broken into two lines you should shorten the affiliation by using 
+% abbrevations or any other means
+%
+% First committee member should be the chair of examining committee
+% Typically the chair is one of the highest ranked committee members
+% Ask your supervisor if you are not sure
+\committeememberii[]{}
+\affiliationii{Electrical and Electronics Engineering, METU}
+% Second committee member is always your supervisor
+\committeememberiii[]{}
+\affiliationiii{Computer Engineering, METU}
+% If you are an M.Sc. student and your Co-Supervisor is in your 
+% examination committee, then third committee member is always your co-supervisor
+%
+% IMPORTANT: If you are Ph.D. student your co-supervisor can not be in your 
+% examination committee.
+
+% \def\@proftitlename{Prof. Dr.}\def\@tproftitlename{Prof. Dr.}
+% \def\@assocproftitlename{Assoc. Prof. Dr.}\def\@tassocproftitlename{Doç. Dr.}
+% \def\@assistproftitlename{Assist. Prof. Dr.}\def\@tassistproftitlename{Yrd. Doç. Dr.}
+% \def\@drtitlename{Dr.}\def\@tdrtitlename{Dr.}
+
+\committeememberiv[]{}
+\affiliationiv{Electrical and Electronics Engineering, METU}
+% Fourth committee member
+\committeememberi[prof]{}
+\affiliationi{Electrical and Electronics Engineering, METU}
+% Fifth committee member
+\committeememberv[]{}
+\affiliationv{Computer Engineering, Ankara University}
+%
+% Keywords : English & Turkish, Comma seperated
+\keywords{}
+\anahtarklm{}
+%
+% Abstract in English
+%
+\abstract{
+
+
+}
+%
+% Turkish Abstract
+%
+\oz{
+
+
+} 
+%
+% Dedication 
+\dedication{To my dear ...}
+%
+%
+% Acknowledgements   
+\acknowledgments{
+
+}
+
+%
+% End of Personal and Introductory Information
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\begin{document}
+
+% Preliminaries
+\begin{preliminaries}
+% If you are willing to use any custom stuff before Chapters, put it here
+% Such as List of Abbreviations
+% Check the abbreviations.tex for a template list of abbreviations
+
+\input{abbreviations.tex}
+% End of Preliminaries
+\end{preliminaries}
+%   
+% Latex content Goes Here 
+% 
+%
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{10pt}
+
+% You can add as many chapters
+
+\hide{
+%Notes for yourself
+}
+
+\input{chapters/chapter_1intro.tex}
+\input{chapters/chapter_2relwork.tex}
+\input{chapters/chapter_3mathbackgnd.tex}
+\input{chapters/chapter_7conclusion.tex}
+
+\input{references.tex}
+
+%
+% References in Bibtex format goes into below indicated file with .bib extension
+%\bibliography{thesis_references}
+% You can use full name of authors, however most likely some of the Bibtex entries you will find, will use abbreviated first names
+% If you don't want to correct each of them by hand, you can use abbreviated style for all of the references
+
+%\bibliographystyle{abbrv}
+
+% if you have more that one appendix, then use \appendices, otherwise use 
+% \appendix
+% \input{appendix/appendix1.tex}
+\end{document}
