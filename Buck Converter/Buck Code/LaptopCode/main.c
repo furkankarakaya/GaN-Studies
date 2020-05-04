@@ -40,14 +40,15 @@ extern void GPIO_SetupXINT4Gpio(Uint16);
 #define SW1 GPIO104 // Class D
 #define SW2 GPIO29 // Class A
 #define TRIG GPIO32 // Class B
+#define DUMMYIO GPIO6 // Class A
 #define EN1 GPIO58 // Class B
 #define EN2 GPIO59 // Class B
 #define SOFT1 GPIO122 // Class D
 #define SOFT2 GPIO123 // Class D
 #define OCP1 GPIO16 // Class A
 #define OCP2 GPIO24 // Class A
-#define CHARGER GPIO1 // Class A
 #define FREEWHEEL GPIO0 // Class A
+#define CHARGER GPIO1 // Class A
 
 #define RESULTS_BUFFER_SIZE 256
 #define sysclk_frequency    200000000   // Hz
@@ -76,6 +77,7 @@ volatile float Vout;
 volatile float Vin;
 volatile float Curr1;
 volatile float Curr2;
+volatile Uint16 CodeTrig = 0;
 
 float VoltsPerBit = 0.00004577637;
 float CurrSensorSensitivity = 30.3030303;
@@ -207,20 +209,35 @@ int main(void)
 
     while(1)
     {
-#ifdef SCT
+#ifdef SCTEST
 #ifdef PB_DEACTIVE
+        if (CodeTrig == 1)
+        {
         GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
-        GpioDataRegs.GPASET.bit.CHARGER = 1;
         GpioDataRegs.GPASET.bit.FREEWHEEL = 1;
+        int j = 0;
+        for (j = 0; j<100; j++)
+            asm(" RPT #100 || NOP");
+        GpioDataRegs.GPBSET.bit.TRIG = 1;
+        asm(" RPT #25 || NOP");
+        GpioDataRegs.GPASET.bit.CHARGER = 1;
         asm(" RPT #40 || NOP");
-        GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
+        EALLOW;
+        EPwm3Regs.TZFRC.bit.OST = 1;
+        EDIS;
+        //GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
+        asm(" RPT #2 || NOP");
+        GpioDataRegs.GPBCLEAR.bit.TRIG = 1;
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
-        DELAY_US(1000000); // 100usec delay
+        GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
+
+        CodeTrig = 0;
+        }
 #endif
 #endif
-        GpioDataRegs.GPASET.bit.CHARGER = 1;
-        GpioDataRegs.GPASET.bit.FREEWHEEL = 1;
+
+
 
     }
 }
@@ -231,7 +248,7 @@ int main(void)
 
 __interrupt void epwm3_tzint_isr(void)
 {
-    asm(" RPT #40 || NOP");
+    asm(" RPT #10 || NOP");
     HardTurnOFF();
     int i = 0;
     GpioDataRegs.GPBSET.bit.LED2 = 1;
@@ -242,14 +259,14 @@ __interrupt void epwm3_tzint_isr(void)
         GpioDataRegs.GPDTOGGLE.bit.LED1 = 1;
         DELAY_US(1000000);
     }
-
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP2;
 }
 __interrupt void xint4_isr(void)
 {
     GpioDataRegs.GPBTOGGLE.bit.LED2 = 1;
-    GpioDataRegs.GPBSET.bit.EN2 = 1;
-    GpioDataRegs.GPBSET.bit.EN1 = 1;
+    EALLOW;
+    WdRegs.WDCR.all = 0x0000;
+    EDIS;
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP12;
 }
 __interrupt void xint3_isr(void)
@@ -259,19 +276,24 @@ __interrupt void xint3_isr(void)
         GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
         GpioDataRegs.GPBSET.bit.TRIG = 1;
-        GpioDataRegs.GPASET.bit.CHARGER = 1;
+
         for (i = 0; i < 1; ++i)
         {
-            asm(" RPT #100 || NOP");
+            GpioDataRegs.GPASET.bit.CHARGER = 1;
+            asm(" RPT #75 || NOP");
         }
         GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
-        asm(" RPT #20 || NOP");
+        asm(" RPT #10|| NOP");
+        asm(" RPT #10 || NOP");
         GpioDataRegs.GPASET.bit.FREEWHEEL = 1;
-        asm(" RPT #20 || NOP");
+        asm(" RPT #10 || NOP");
+        asm(" RPT #10 || NOP");
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
-        asm(" RPT #20 || NOP");
+        asm(" RPT #10 || NOP");
+        asm(" RPT #10 || NOP");
         GpioDataRegs.GPASET.bit.CHARGER = 1;
-        asm(" RPT #30 || NOP");
+        asm(" RPT #10 || NOP");
+        asm(" RPT #10 || NOP");
         GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
         GpioDataRegs.GPBCLEAR.bit.TRIG = 1;
@@ -282,22 +304,28 @@ __interrupt void xint3_isr(void)
 #ifdef PB_ACTIVE
         GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
-        GpioDataRegs.GPASET.bit.CHARGER = 1;
         GpioDataRegs.GPASET.bit.FREEWHEEL = 1;
-        asm(" RPT #20 || NOP");
-        GpioDataRegs.GPASET.bit.GPIO4 = 1;
-        GpioDataRegs.GPASET.bit.GPIO5 = 1;
-        asm(" RPT #100 || NOP");
+        int j = 0;
+        for (j = 0; j<100; j++)
+            asm(" RPT #100 || NOP");
+        GpioDataRegs.GPBSET.bit.TRIG = 1;
+        asm(" RPT #25 || NOP");
+        GpioDataRegs.GPASET.bit.CHARGER = 1;
+        asm(" RPT #40 || NOP");
         GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
+        /*EALLOW;
+        EPwm3Regs.TZFRC.bit.OST = 1;
+        EDIS;*/
+        asm(" RPT #2 || NOP");
+        GpioDataRegs.GPBCLEAR.bit.TRIG = 1;
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
-        GpioDataRegs.GPACLEAR.bit.GPIO4 = 1;
-        GpioDataRegs.GPACLEAR.bit.GPIO5 = 1;
-        asm(" RPT #2000 || NOP");
-        GpioDataRegs.GPACLEAR.bit.GPIO4 = 1;
-        GpioDataRegs.GPACLEAR.bit.GPIO5 = 1;
-#endif
+        GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
     #endif
 
+    #ifdef PB_DEACTIVE
+       CodeTrig = 1;
+    #endif
+#endif
     GpioDataRegs.GPDTOGGLE.bit.LED1 = 1;
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP12;
 }
@@ -381,6 +409,10 @@ void GpioSelect(void)
     GpioCtrlRegs.GPBPUD.bit.TRIG = 1; // enable pull up
     GpioCtrlRegs.GPBDIR.bit.TRIG = 1; // set it as output
     GpioDataRegs.GPBCLEAR.bit.TRIG = 1; // Clear data
+    GpioCtrlRegs.GPAPUD.bit.DUMMYIO = 1; // enable pull up
+    GpioCtrlRegs.GPADIR.bit.DUMMYIO = 1; // set it as output
+    GpioDataRegs.GPACLEAR.bit.DUMMYIO = 1; // Clear data
+
 
 // Push Button GPIOs
     GpioCtrlRegs.GPDPUD.bit.SW1 = 1;
@@ -700,8 +732,8 @@ void HardTurnOFF(void)
       GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
 #endif
 #ifdef SCTEST
-      GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
       GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
+      GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
 #endif
 }
 
@@ -715,13 +747,13 @@ interrupt void adca2_isr(void)
     Curr1 = (AdcaResultRegs.ADCRESULT0*VoltsPerBit - 1.5) * CurrSensorSensitivity;
     Curr2 = (AdcaResultRegs.ADCRESULT1*VoltsPerBit - 1.5) * CurrSensorSensitivity;
     Vin = (AdcaResultRegs.ADCRESULT2*VoltsPerBit - 1.5) * VinpGain;
-    Vout = (AdcaResultRegs.ADCRESULT2*VoltsPerBit - 1.5) * VoutGain;
     AdcaRegs.ADCINTFLGCLR.bit.ADCINT2 = 1; //clear INT2 flag
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP10;
 }
 interrupt void adcb2_isr(void)
 {
-    AdcVout = AdcbResultRegs.ADCRESULT0;
+    //AdcVout = AdcbResultRegs.ADCRESULT0;
+    Vout = (AdcbResultRegs.ADCRESULT0*VoltsPerBit - 1.5) * VoutGain;
     AdcbRegs.ADCINTFLGCLR.bit.ADCINT2 = 1; //clear INT2 flag
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP10;
 }
