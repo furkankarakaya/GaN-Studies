@@ -56,14 +56,24 @@ extern void GPIO_SetupXINT4Gpio(Uint16);
 #define pwmclk_frequency    200000000   // Hz
 #define pwmclk_period       5               // ns
 #define PI                  3.141592654
-#define switching_frequency 500000           // Hz
-#define dead_time           100             // ns
 #define sample_window       65          // clock
 #define adc_frequency       50000000    //ns
 #define adc_period          200         //ns
 
+// Buck Conversion Parameters
+
+#define input_voltage 	182
+#define output_voltage 	144
+#define duty_op			0.788		
+#define switching_frequency 150000           // Hz
+#define dead_time           100             // ns
+
 #define DPT 1; // BUCK or DPT or SCTEST
 #define PB_DEACTIVE 1; // PB_ACTIVE or PB_DEACTIVE
+#ifdef BUCK
+#define SOFTSTART 1
+#endif
+
 
 // Global Variables
 Uint16 AdcaResults[RESULTS_BUFFER_SIZE];
@@ -78,6 +88,7 @@ volatile float Vin;
 volatile float Curr1;
 volatile float Curr2;
 volatile Uint16 CodeTrig = 0;
+volatile Uint16 StartTrig = 0;
 
 float VoltsPerBit = 0.00004577637;
 float CurrSensorSensitivity = 30.3030303;
@@ -112,7 +123,7 @@ int main(void)
     ClkCfgRegs.PERCLKDIVSEL.bit.EPWMCLKDIV = 0; // EPWM Clock Divide Select: /1 of PLLSYSCLK
     EDIS;
     InitCpuTimers();   // For this example, only initialize the Cpu Timers
-    ConfigCpuTimer(&CpuTimer0, 200, 1000000); //1 seconds
+    ConfigCpuTimer(&CpuTimer0, 200, round(50/(switching_frequency/1000000))); //100 useconds
     ConfigCpuTimer(&CpuTimer1, 200, 1000000); //1 seconds
     ConfigCpuTimer(&CpuTimer2, 200, 1000000); //1 seconds
 
@@ -166,7 +177,7 @@ int main(void)
     GpioDataRegs.GPBSET.bit.EN2 = 1;
     GpioDataRegs.GPBSET.bit.EN1 = 1;
 
-    // Initialize PWMs
+    // Initialize TZ PWM
     InitEpwm1();
     InitEpwm2();
     InitEpwm3();
@@ -264,9 +275,9 @@ __interrupt void epwm3_tzint_isr(void)
 __interrupt void xint4_isr(void)
 {
     GpioDataRegs.GPBTOGGLE.bit.LED2 = 1;
-    EALLOW;
-    WdRegs.WDCR.all = 0x0000;
-    EDIS;
+    #ifdef BUCK
+    CodeTrig = 1;
+    #endif
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP12;
 }
 __interrupt void xint3_isr(void)
@@ -342,6 +353,30 @@ __interrupt void xint1_isr(void)
 
 __interrupt void cpu_timer0_isr(void)
 {
+    if (CodeTrig == 1)
+    {	
+
+       	#ifdef SOFTSTART
+       	if (StartTrig == 0)
+       	{	
+       		EPwm1Regs.CMPA.bit.CMPA = round(EPwm1Regs.TBPRD*duty_op*0.25);
+       		StartTrig = 1;
+       	}
+       	else if(EPwm1Regs.CMPA.bit.CMPA < round(EPwm1Regs.TBPRD*duty_op))
+       	{
+       		EPwm1Regs.CMPA.bit.CMPA = EPwm1Regs.CMPA.bit.CMPA + EPwm1Regs.TBPRD/100;
+       	}
+       	else
+       	{
+       		#endif
+       		EPwm1Regs.CMPA.bit.CMPA = round(EPwm1Regs.TBPRD*duty_op);
+       		CodeTrig = 0;
+       		StartTrig = 0;
+       		#ifdef SOFTSTART
+       	}
+       	#endif
+    	
+    }
     CpuTimer0.InterruptCount++;
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
 }
@@ -528,7 +563,8 @@ void InitEpwm1(void)
     EPwm1Regs.TBCTR = 0x0000;          // Clear counter
 
     EPwm1Regs.CMPCTL.all = 0x00;
-    EPwm1Regs.CMPCTL.bit.SHDWAMODE = 1;         //only active registers are used
+    EPwm1Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;         //only active registers are used
+    EPwm1Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
     //EPwm1Regs.CMPCTL.bit.SHDWBMODE = 1;//only active registers are used
 
     EPwm1Regs.AQCTLA.all = 0x00;
@@ -538,7 +574,7 @@ void InitEpwm1(void)
     //EPwm1Regs.AQCTLB.bit.CBU = 1; //set low
     //EPwm1Regs.AQCTLB.bit.CBD = 2; //set high
 
-    EPwm1Regs.CMPA.bit.CMPA = EPwm1Regs.TBPRD / 2;    // Set compare A value
+    EPwm1Regs.CMPA.bit.CMPA = EPwm1Regs.TBPRD + 1;    // Set compare A value
     //EPwm1Regs.CMPB.half.CMPB = EPwm1Regs.TBPRD/2;    // Set Compare B value
 
     EPwm1Regs.TBPHS.bit.TBPHS = 0x0000;          // Phase is 0
@@ -579,6 +615,7 @@ void InitEpwm2(void)
 
     EPwm2Regs.CMPCTL.all = 0x00;
     EPwm2Regs.CMPCTL.bit.SHDWAMODE = 1;         //only active registers are used
+    EPwm2Regs.CMPCTL.bit.LOADAMODE = 1;
     //EPwm2Regs.CMPCTL.bit.SHDWBMODE = 1;//only active registers are used
 
     EPwm2Regs.AQCTLA.all = 0x00;
@@ -588,7 +625,7 @@ void InitEpwm2(void)
     //EPwm2Regs.AQCTLB.bit.CBU = 1; //set low
     //EPwm2Regs.AQCTLB.bit.CBD = 2; //set high
 
-    EPwm2Regs.CMPA.bit.CMPA = EPwm2Regs.TBPRD / 2;    // Set compare A value
+    EPwm2Regs.CMPA.bit.CMPA = EPwm2Regs.TBPRD + 1;    // Set compare A value
     //EPwm2Regs.CMPB.half.CMPB = EPwm2Regs.TBPRD/2;    // Set Compare B value
 
 
