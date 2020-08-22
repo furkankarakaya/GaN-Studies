@@ -62,14 +62,16 @@ extern void GPIO_SetupXINT4Gpio(Uint16);
 
 // Buck Conversion Parameters
 
-#define input_voltage 	182
+#define input_voltage 	180
 #define output_voltage 	144
-#define duty_op			0.788		
-#define switching_frequency 150000           // Hz
+volatile float duty_op = 0.303;
+#define switching_frequency 450000           // Hz
 #define dead_time           100             // ns
 
-#define DPT 1; // BUCK or DPT or SCTEST
+#define BUCK 1; // BUCK or DPT or SCTEST
 #define PB_DEACTIVE 1; // PB_ACTIVE or PB_DEACTIVE
+#define ADC_ACT 1;
+#define BOOST 1;
 #ifdef BUCK
 #define SOFTSTART 1
 #endif
@@ -99,6 +101,7 @@ float VoutGain = 147.6634885;
 void GpioSelect(void);
 
 
+
 /**
  * main.c
  */
@@ -123,7 +126,8 @@ int main(void)
     ClkCfgRegs.PERCLKDIVSEL.bit.EPWMCLKDIV = 0; // EPWM Clock Divide Select: /1 of PLLSYSCLK
     EDIS;
     InitCpuTimers();   // For this example, only initialize the Cpu Timers
-    ConfigCpuTimer(&CpuTimer0, 200, round(50/(switching_frequency/1000000))); //100 useconds
+    int timer0set = round(50000000/(switching_frequency));
+    ConfigCpuTimer(&CpuTimer0, 200, timer0set ); //100 useconds
     ConfigCpuTimer(&CpuTimer1, 200, 1000000); //1 seconds
     ConfigCpuTimer(&CpuTimer2, 200, 1000000); //1 seconds
 
@@ -139,7 +143,7 @@ int main(void)
     PieVectTable.TIMER1_INT = &cpu_timer1_isr;
     PieVectTable.TIMER2_INT = &cpu_timer2_isr;
     PieVectTable.EPWM3_TZ_INT = &epwm3_tzint_isr;
-#ifdef BUCK
+#ifdef ADC_ACT
     PieVectTable.ADCA2_INT = &adca2_isr;
     PieVectTable.ADCB2_INT = &adcb2_isr;
 #endif
@@ -150,7 +154,7 @@ int main(void)
     PieCtrlRegs.PIEIER1.bit.INTx7 = 1;
     PieCtrlRegs.PIEIER12.bit.INTx1 = 1; //for XINT3
     PieCtrlRegs.PIEIER12.bit.INTx2 = 1; //for XINT4
-#ifdef BUCK
+#ifdef ADC_ACT
     PieCtrlRegs.PIEIER10.bit.INTx2 = 1; // for ADCA2
     PieCtrlRegs.PIEIER10.bit.INTx6 = 1; // for ADCB2
 #endif
@@ -309,6 +313,13 @@ __interrupt void xint3_isr(void)
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
         GpioDataRegs.GPBCLEAR.bit.TRIG = 1;
         asm(" RPT #2000 || NOP");
+
+  /*      GpioDataRegs.GPASET.bit.DUMMYIO = 1;
+        for (i = 0; i < 565; ++i)
+        {
+            asm(" RPT #52 || NOP");
+        }
+        GpioDataRegs.GPACLEAR.bit.DUMMYIO = 1;*/
     #endif
 
     #ifdef SCTEST
@@ -355,21 +366,27 @@ __interrupt void cpu_timer0_isr(void)
 {
     if (CodeTrig == 1)
     {	
-
+        float duty_opp = duty_op;
+#ifdef  BOOST
+        duty_opp = 1.0 - duty_op  - 2.0*dead_time*switching_frequency/1000000000;
+#endif
        	#ifdef SOFTSTART
        	if (StartTrig == 0)
        	{	
-       		EPwm1Regs.CMPA.bit.CMPA = round(EPwm1Regs.TBPRD*duty_op*0.25);
+
+       		EPwm2Regs.CMPA.bit.CMPA = round(EPwm2Regs.TBPRD*(1.0-duty_opp/10.0) + -1*dead_time / pwmclk_period /2);
        		StartTrig = 1;
        	}
-       	else if(EPwm1Regs.CMPA.bit.CMPA < round(EPwm1Regs.TBPRD*duty_op))
+       	else if(EPwm1Regs.CMPA.bit.CMPA > round(EPwm1Regs.TBPRD*(1.0-duty_opp)))
        	{
-       		EPwm1Regs.CMPA.bit.CMPA = EPwm1Regs.CMPA.bit.CMPA + EPwm1Regs.TBPRD/100;
+       		EPwm1Regs.CMPA.bit.CMPA = EPwm1Regs.CMPA.bit.CMPA - EPwm1Regs.TBPRD/100;
+       		EPwm2Regs.CMPA.bit.CMPA = EPwm2Regs.CMPA.bit.CMPA - EPwm2Regs.TBPRD/100;
        	}
        	else
        	{
        		#endif
-       		EPwm1Regs.CMPA.bit.CMPA = round(EPwm1Regs.TBPRD*duty_op);
+       		EPwm1Regs.CMPA.bit.CMPA = round(EPwm1Regs.TBPRD*(1.0-duty_opp) + -1*dead_time / pwmclk_period /2);
+       		EPwm2Regs.CMPA.bit.CMPA = round(EPwm2Regs.TBPRD*(1.0-duty_opp) + -1*dead_time / pwmclk_period /2);
        		CodeTrig = 0;
        		StartTrig = 0;
        		#ifdef SOFTSTART
@@ -377,6 +394,7 @@ __interrupt void cpu_timer0_isr(void)
        	#endif
     	
     }
+    GpioDataRegs.GPATOGGLE.bit.DUMMYIO = 1;
     CpuTimer0.InterruptCount++;
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
 }
@@ -576,6 +594,9 @@ void InitEpwm1(void)
 
     EPwm1Regs.CMPA.bit.CMPA = EPwm1Regs.TBPRD + 1;    // Set compare A value
     //EPwm1Regs.CMPB.half.CMPB = EPwm1Regs.TBPRD/2;    // Set Compare B value
+    #ifdef  BOOST
+    EPwm1Regs.CMPA.bit.CMPA = 0;
+    #endif
 
     EPwm1Regs.TBPHS.bit.TBPHS = 0x0000;          // Phase is 0
 
@@ -627,7 +648,9 @@ void InitEpwm2(void)
 
     EPwm2Regs.CMPA.bit.CMPA = EPwm2Regs.TBPRD + 1;    // Set compare A value
     //EPwm2Regs.CMPB.half.CMPB = EPwm2Regs.TBPRD/2;    // Set Compare B value
-
+    #ifdef  BOOST
+    EPwm2Regs.CMPA.bit.CMPA = 0;
+    #endif
 
 
     EPwm2Regs.TBCTL2.all = 0x00;
