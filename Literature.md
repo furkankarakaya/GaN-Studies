@@ -223,6 +223,24 @@ ___
 
 * It is generally concluded that these **RF-based digital isolators tolerate higher dv/dt** than alterna- tives.  
 
+#### Zhao, Q., & Stojcic, G. (2007). Characterization of Cdv/dt induced power loss in synchronous buck DC-DC converters. IEEE Transactions on Power Electronics, 22(4), 1508–1513. https://doi.org/10.1109/TPEL.2007.900527
+
+* One of the issues frequently discussed but not fully understood or characterized is so-called
+induced switching loss of MOS-FETs used as synchronous rectifier
+
+* The increased voltage across the sync FET induces a current to charge the gate through the gate-to-drain capacitor,
+. The induced voltage can possibly invert (turn-on) the sync FET channel for a short time period. The overlapping of the
+voltage and the current generates additional switching loss.
+
+* The idea is to modify the gate drive circuit so that an adjustable negative gate-source offset voltage can be generated. The purpose of the negative offset voltage is to shift the induced gate voltage below the gate threshold voltage. By applying a sufficient negative offset, the
+induced turn on loss can be completely
+eliminated.
+
+* The benefit of CdV/dt
+induced turn on is the reduced peak
+voltage stress of the sync FET. The optimized design is to minimize the
+induced loss and total losses while the maximum voltage stress of the sync FET is less than the specification.
+
 ## Measurement
 
 #### GaN Transistors for Efficient Power Conversion. (2014). https://doi.org/10.1002/9781118844779
@@ -409,3 +427,9 @@ not ignorable** compared with the ultra-small Coss of GaN HEMT. The parasitic ca
 </br>![](images/PCBParasiticCapacitance.png?raw=true)
 
 </br>![](images/DPT400V240A.png?raw=true)
+
+## CrCM Converter
+
+#### Mao, H., Abdel Rahman, O., & Batarseh, I. (2008). Zero-voltage-switching DC-DC converters with synchronous rectifiers. IEEE Transactions on Power Electronics, 23(1), 369–378. https://doi.org/10.1109/TPEL.2007.911768
+
+* 
