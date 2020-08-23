@@ -432,4 +432,120 @@ not ignorable** compared with the ultra-small Coss of GaN HEMT. The parasitic ca
 
 #### Mao, H., Abdel Rahman, O., & Batarseh, I. (2008). Zero-voltage-switching DC-DC converters with synchronous rectifiers. IEEE Transactions on Power Electronics, 23(1), 369–378. https://doi.org/10.1109/TPEL.2007.911768
 
-* 
+* In **low-output-voltage dc–dc converters, SRs are widely utilized to reduce rectifier conduction loss** and improve converter efficiency. However, **during switches’ transition, SRs’ parasitic body diodes unavoidably carry load current**, which **decreases conversion efficiency** because voltage drop across body diodes is much higher than that across SRs.
+
+* **The reverse recovery problem of MOSFET body diodes is a barrier to SRs’ applications with higher voltage**, for example, SRs with 200 V and higher voltage ratings are hardly found in applications, **because SR body diodes’ reverse recovery is more severe with increased voltage ratings, which significantly increase switches’ and body diodes’ switching loss.**
+
+* Recently, **soft-switching techniques** draw a lot of attention in **reducing switching loss and electromagnetic interference (EMI) noises**.
+
+* **Quasi-resonant converters (QRCs)** were introduced to overcome the disadvantages of conventional pulse width modulation (PWM) converters operating at high switching frequency **by achieving ZVS for the active switch and zero current switching (ZCS) for the rectifier diode**
+
+* **By reducing the filter inductance** in the conventional PWM converters, **ZVS quasi-square-wave (QSW) technique offers ZVS for both the active and passive switches** without increasing the switches’ voltage stress [3], [4], [13]. However, **QSW converters suffer high current stress in components**, as a result, conduction losses are greatly increased, and **active switches turn off at high currents**.
+
+* Due to the **SR’s body-diode reverse-recovery current, the active switch
+suffers from extra turn-on
+loss**, and the **SR’s body diode suffers from hard turn-off loss**. In short, in the SR buck converter, **active switch
+operates at undesirable conditions of hard turn-on**; **the SR operates at ZVS turn-on, but the body diode’s reverse recovery leads to extra switching loss and EMI problems**.
+
+* The **ideal switching operation is: all switches’ body diodes conducts prior to turn-on of the switches**, and **all switches turn off with inductive load instead of capacitive load**. In other words, **to avoid body diode’s hard turn-off, the current commutation sequence must be from a switch to a body diode** instead of from a body diode to a switch.
+
+#### P. Das, S. A. Mousavi, and G. Moschopoulos, “Analysis and design of a nonisolated bidirectional ZVS-PWM DC-DC converter with coupled inductors,” IEEE Trans. Power Electron., vol. 25, no. 10, pp. 2630–2641, 2010.
+
+* The **batteries are connected to the buses with bidirectional dc–dc converters** that allow them to discharge or to be charged when necessary.
+
+* The **nonisolated converters are less expensive** than the isolated ones, as they need fewer active switches and passive components.
+
+* The **coupled inductors allow the converter to have a steep voltage conversion** ratio that **keeps the duty cycle from becoming too narrow** (when the converter is in the buck mode of operation), or **too wide** (when the converter is in the boost mode of operation).
+
+* The **earlier proposed ZVS techniques** for non-isolated bidirectional dc–dc converters can be categorized as follows.
+
+ 1) **Buck/boost converters that are made to operate with an inductor (Lin ) current that flows in both directions** during each switching cycle. The inductor current, however, has a **high ripple** and must flow in both directions. This results in high turn OFF and circulating current losses.
+
+ 2) **Quasi- or multiresonant converters that have high-switch peak voltage stresses** and are difficult to control and implement.
+
+ 3) **Zero-voltage transition (ZVT) converters that use auxiliary circuits** to help the switches operate with ZVS.
+
+#### J. W. Yang and H. L. Do, “High-efficiency bidirectional dc-dc converter with low circulating current and ZVS characteristic throughout a full range of loads,” IEEE Trans. Ind. Electron., vol. 61, no. 7, pp. 3248–3256, 2014.
+
+* The **big advantage of an isolated bidirec- tional** dc–dc converter **is galvanic isolation** which is an effective method for breaking a ground loop. However, **this converter requires an isolated transformer and more than four switches** for galvanic isolation so that its efficiency is lower than that of a nonisolated-type converter [8]–[13]. On the other hand, the **advantages of a nonisolated bidirectional dc–dc converter are simple structure, fundamentally including an inductor and two switches, and higher efficiency** than an isolated-type converter.
+
+#### M. Pavlovsky, G. Guidi, and A. Kawamura, “Buck/boost DC-DC converter topology with soft switching in the whole operating region,” IEEE Trans. Power Electron., vol. 29, no. 2, pp. 851–862, 2014.
+
+* One of the **main motivations behind the proposed topology
+was also to keep it as simple as possible**. The simplicity was especially important from the ease of structural layout point of view.
+
+* The topology was implemented in a **14 kW converter** prototype operating at **62.5 kHz** and tested with complete **closed-loop control**. Experimental efficiencies in the range of **98.5%** show that the proposed circuit is highly capable while remaining sufficiently simple.
+
+#### W. Lee, D. Han, C. Morris, and B. Sarlioglu, “Minimizing switching losses in high switching frequency GaN-based synchronous buck converter with zero-voltage resonant-transition switching,” 9th Int. Conf. Power Electron. - ECCE Asia "Green World with Power Electron. ICPE 2015-ECCE Asia, pp. 233–239, 2015.
+
+* In this paper, a **GaN-based synchronous buck converter operating with zero-voltage resonant-transition (ZVRT) switching in synchronous conduction mode is proposed**. The **ZVRT switching converter offers** a favorable **trade-off between switching and conduction losses** especially in GaN-based DC-DC converters.
+
+* However, **GaN devices are more suitable for 600 V or less voltage level** and **lower power applications than SiC** due to its high electron mobility and size advantage.
+
+* The basic concept and the experimental results of a **zero-voltage-switched quasi-resonant-wave (ZVS-QSW) converter**, which is also called **zero-voltage resonant-transition (ZVRT)** switching converter, operating at **1 MHz** is presented in reference.
+
+* This soft switching can be obtained by **choosing an appropriately valued inductor such that the peak-to-peak inductor current (current ripple) is always higher than twice the average output current**. This technique is relatively **simple to achieve** since it does **not require either additional passive and active components** or a complicated control loop. However, the **main disadvantage of this converter is the high conduction losses** due to the two times higher current ripple. Because of the high conduction losses, this technique is **not suitable for applications where minority carrier devices, such as IGBTs**.
+
+* With GaN-based ZVRT switching converters, **the low switching losses can be achieved while not significantly increasing their conduction losses**. Furthermore, **a current spike due to the high dv/dt of the GaN device and the output capacitance, Coss can be decreased with soft switching** and it also **helps to minimize the switching losses.**
+
+* **To achieve soft switching with the ZVRT switching converter, an appropriately sized inductor value is the most important design consideration**. The inductor value needs to be the maximum inductance that enables the ZVRT switching while keeping the inductor current ripple as small as possible.
+
+* The value **K must be greater than 2** to have the negative current for soft switching. **In general, it is set to be 4 to have three to one ratio** of the turn-on and turn-off transitions for the switching devices.
+
+</br>![](images/EqCondLoss.jpg?raw=true)
+
+* Especially the **switching device loss of Q1 is decreased from 2.6 W to 0.16 W due to soft
+switching**. The
+switching device **loss of Q2 is increased due to the high reverse current flowing** into the device at the switching transition. In addition, **the capacitor conduction loss due to the equivalent series resistance (ESR) increases in ZVRT converter because of the high current ripple**. The **overall converter losses
+are decreased by 50%** at maximum in ZVRT converter compared to the conventional converter.
+
+#### X. Huang, F. C. Lee, Q. Li, and W. Du, “High-Frequency High-Efficiency GaN-Based Interleaved CRM Bidirectional Buck/Boost Converter with Inverse Coupled Inductor,” IEEE Trans. Power Electron., vol. 31, no. 6, pp. 4343–4352, 2016.
+
+* The **resonant period in CRM is less with an inverse coupled inductor than with a noncoupled inductor**, which is beneficial for the high-frequency operation.
+
+* THE **bidirectional buck/boost converter is widely used in the power electronics system** due to its simplicity and high
+efficiency, such as the **on board charger/discharger for plug-in hybrid electric vehicles** [1]–[3], and the **interfaced converter for the energy storage systems** [4], [5].
+
+* **Critical current mode (CRM) operation is the most simple and
+effective way to achieve ZVS**, and is widely used in medium-low power applications [8], [11], [13]. CRM operation **introduces a large current ripple**, which is at least twice of the load current. It is **necessary to interleave multiple phases to cancel the switching frequency current ripple** and lead to a smaller EMI filter.
+
+* Furthermore, **the resonant period formed by the inductor and device junction capacitors is too long** at high frequency, which leads to a large circulating energy.
+
+* Switch **Ts is the main switch in the buck direction**, while **Bs is the main switch in the boost direction**. If the main switch **turn-on instant is set to exactly half the resonant period** after the inductor current crosses zero via any zero-current detection technique, the switch achieves minimum voltage turn-on.
+
+* **Another limiting factor of CRM operation at high frequency is the resonant time Tr** , which is half of the resonant period formed by L and the junction capacitors of the devices.
+
+* One way to **solve the limitations of conventional CRM operation is to utilize the quasi-square-wave soft-switching technique**. However, the **negative portion of the inductor current grows larger** under light-load conditions, which will significantly deteriorate the converter efficiency. **Another solution is to use a coupled inductor to improve the CRM performance**, including ZVS range extension/circulating energy reduction and resonant period reduction.
+
+* **This paper aims** to analyze the benefits of the **inverse coupled inductors in CRM operation based** on a 1-MHz interleaved buck/boost converter with GaN devices.
+
+* 380V to 150V @ 1MHz, 98.5%, 8A at output max.
+
+#### T. Konjedic, L. Korošec, M. Truntič, C. Restrepo, M. Rodič, and M. Milanovič, “DCM-based zero-voltage switching control of a bidirectional DC-DC converter with variable switching frequency,” IEEE Trans. Power Electron., vol. 31, no. 4, pp. 3273–3288, 2016.
+
+* A **major concern in synchronous dc–dc converters** is the **reverse recovery effect of the synchronous transistor’s** antiparallel body diode at the instant of turning ON the main transistor (mainFET). For **the duration of the reverse recovery phenomena**, both transistors are exposed to high current change rates and **high peak reverse recovery currents, which significantly increase switching losses, cause electromagnetic interference, and lead to dangerous operating conditions**. **Another drawback** of hard-switched converters that utilize synchronous rectification **is the unwanted Cdv/dt-induced turn-on** of the synchronous transis- tor (syncFET) immediately after its body diode recovers.
+
+* The ever **more demanding requirements for compact, lightweight, and small-sized power converters** are pushing their **operating frequencies to the values where the sizes of the pas- sive components in the circuit can be significantly reduced**. The main **negative effect of operating at such high switching frequencies** is the increase in **switching losses and the resulting lower power conversion efficiency**. In order to overcome this drawback, **zero-voltage switching (ZVS) approaches are widely applied** to all kinds of switching power converters. The **utilization of ZVS alleviates the switching losses and significantly decreases the rate of power conversion efficiency** deterioration with increasing switching frequency. As a consequence, much higher power densities can be achieved at unaffected power conversion efficiencies.
+
+* The **key for achieving zero-voltage turn-on of the syncFET** in both CCM and DCM **is in providing a sufficiently long dead time, i.e.,** time interval between turning OFF the mainFET and turning ON the syncFET.
+
+* In order **to achieve zero-voltage turn-on of the mainFET**, the
+**turn-off instant of the syncFET has to be delayed** to the point at which the inductor current iL reaches a certain value in the direction that opposes the primary energy flow in a synchronous converter. **This value is designated as the reversed current IR**. The selection of its value is of crucial importance since an insufficient IR cannot provide enough **charge to completely discharge CossH and charge CossL to the voltage**.
+
+* This paper has **proposed a digital control scheme for achieving ZVS throughout the entire operating range** of a conventional bidirectional dc–dc converter.
+
+
+#### G. Chen, L. Chen, Y. Tao, Y. Deng, and X. He, “Zero-voltage-switching synchronous buck converter with coupled inductor,” Diangong Jishu Xuebao/Transactions China Electrotech. Soc., vol. 31, no. 8, pp. 102–110, 2016.
+
+* However, at the moment that the **upper switch turns on, it provokes the reverse recovery phenomenon** of the antiparallel body diode of the synchronous switch [3]–[7]. During this interval, the switches are submitted to a **high current change rate and a high peak of reverse recovery current**, as shown in Fig. 1(b). These two effects significantly contribute to **increase switching losses and electromagnetic interference**, which may offset the benefits of using the synchronous switch.
+
+* The **ZVS control scheme can reduce the switching loss**. However, **DCM/CCM boundary operation increases the ripple component of the inductor current.** The large conduction loss due to high ripple components lowers the overall efficiency. In order **to minimize the conduction loss and the output voltage ripple, the CCM operation needs to be maintained**.
+
+#### Q. Huang and A. Q. Huang, “Variable Frequency Average Current Mode Control for ZVS Symmetrical Dual-Buck H-Bridge All-GaN Inverter,” IEEE J. Emerg. Sel. Top. Power Electron., vol. PP, no. c, pp. 1–1, 2019.
+
+* From 2014 to 2016, Google and IEEE hosted a world-wide
+competition, **Little Box Challenge**, aiming to achieve the highest power density for a **2kW single-phase PV inverter**. Several teams of the 18 finalists, such as the ETH team, the Fraunhofer team and the winning team Red Electric Devils, **proposed a similar inverter topology which was the symmetrical dual-Buck H-bridge (DBHB)** inverter topology [12]-[14]. The winning team Red Electric Devils achieved power density of **142.9W/in3(8.7kW/l)** [14]. Due to this competition, the DBHB inverter topology, shown in Fig. 1, has drawn great attention in industry and academia [12]-[15].
+
+* The **ZVS technique can help the symmetrical DBHB GaN inverters push the switching frequencies much higher** compared to the hard- switching technique. ZVS symmetrical DBHB GaN inverters are **drawing more interests than the hard-switching ones**, since the ZVS GaN inverters have **more potential of high power density** than the hard-switching GaN inverters.
+
+* **ZVS is realized by** pushing the lower current reference band to the required **negative valley current**.
