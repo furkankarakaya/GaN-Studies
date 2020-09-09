@@ -7,6 +7,7 @@
 * [Comparison of Wide-Band-Gap Technologies for Soft-Switching Losses at High Frequencies](https://ieeexplore.ieee.org/document/9079584)
 * [Enhanced DAB for Efficiency Preservation Using Adjustable-Tap High-Frequency Transformer](https://ieeexplore.ieee.org/document/8930089)
 * [High-Accuracy Calibration-Free Calorimeter for the Measurement of Low Power Losses](https://ieeexplore.ieee.org/document/9112711)
+* [97.4%-Efficient All-GaN Dual-Active-Bridge Converter with High Step-up High-Frequency Matrix Transformer](https://ieeexplore.ieee.org/document/9178210)
 
 # Simulation Documents
 
