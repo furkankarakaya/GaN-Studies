@@ -48,7 +48,7 @@ extern void GPIO_SetupXINT4Gpio(Uint16);
 #define OCP1 GPIO16 // Class A
 #define OCP2 GPIO24 // Class A
 #define FREEWHEEL GPIO0 // Class A
-#define CHARGER GPIO1 // Class A
+#define CHARGER GPIO1// Class A
 
 #define RESULTS_BUFFER_SIZE 256
 #define sysclk_frequency    200000000   // Hz
@@ -68,7 +68,7 @@ volatile float duty_op = 0.303;
 #define switching_frequency 450000           // Hz
 #define dead_time           100             // ns
 
-#define BUCK 1; // BUCK or DPT or SCTEST
+#define DPT 1; // BUCK or DPT or SCTEST
 #define PB_DEACTIVE 1; // PB_ACTIVE or PB_DEACTIVE
 #define ADC_ACT 1;
 #define BOOST 1;
@@ -292,12 +292,24 @@ __interrupt void xint3_isr(void)
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
         GpioDataRegs.GPBSET.bit.TRIG = 1;
 
-        for (i = 0; i < 1; ++i)
+        for (i = 0; i < 160; ++i)
         {
             GpioDataRegs.GPASET.bit.CHARGER = 1;
-            asm(" RPT #75 || NOP");
+            //asm(" RPT #75 || NOP");
+            asm(" RPT #10|| NOP");
+            asm(" RPT #10 || NOP");
+            asm(" RPT #10 || NOP");
+            GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
+            asm(" RPT #10|| NOP");
+            asm(" RPT #10 || NOP");
+            GpioDataRegs.GPASET.bit.FREEWHEEL = 1;
+            asm(" RPT #10 || NOP");
+            asm(" RPT #10 || NOP");
+            GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
+            asm(" RPT #10 || NOP");
+            //asm(" RPT #10 || NOP");
         }
-        GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
+/*        GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
         asm(" RPT #10|| NOP");
         asm(" RPT #10 || NOP");
         GpioDataRegs.GPASET.bit.FREEWHEEL = 1;
@@ -308,7 +320,7 @@ __interrupt void xint3_isr(void)
         asm(" RPT #10 || NOP");
         GpioDataRegs.GPASET.bit.CHARGER = 1;
         asm(" RPT #10 || NOP");
-        asm(" RPT #10 || NOP");
+        asm(" RPT #10 || NOP");*/
         GpioDataRegs.GPACLEAR.bit.CHARGER = 1;
         GpioDataRegs.GPACLEAR.bit.FREEWHEEL = 1;
         GpioDataRegs.GPBCLEAR.bit.TRIG = 1;
