@@ -1,0 +1,402 @@
+%  LaTeX support: latex@mdpi.com
+%  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
+
+%=================================================================
+\documentclass[energies,article,submit,moreauthors,pdftex]{Definitions/mdpi}
+
+% For posting an early version of this manuscript as a preprint, you may use "preprints" as the journal and change "submit" to "accept". The document class line would be, e.g., \documentclass[preprints,article,accept,moreauthors,pdftex]{mdpi}. This is especially recommended for submission to arXiv, where line numbers should be removed before posting. For preprints.org, the editorial staff will make this change immediately prior to posting.
+
+%--------------------
+% Class Options:
+%--------------------
+%----------
+% journal
+%----------
+% Choose between the following MDPI journals:
+% energies
+%---------
+% article
+%---------
+% The default type of manuscript is "article", but can be replaced by:
+% abstract, addendum, article, book, bookreview, briefreport, casereport, comment, commentary, communication, conferenceproceedings, correction, conferencereport, entry, expressionofconcern, extendedabstract, datadescriptor, editorial, essay, erratum, hypothesis, interestingimage, obituary, opinion, projectreport, reply, retraction, review, perspective, protocol, shortnote, studyprotocol, systematicreview, supfile, technicalnote, viewpoint, guidelines, registeredreport, tutorial
+% supfile = supplementary materials
+
+%----------
+% submit
+%----------
+% The class option "submit" will be changed to "accept" by the Editorial Office when the paper is accepted. This will only make changes to the frontpage (e.g., the logo of the journal will get visible), the headings, and the copyright information. Also, line numbering will be removed. Journal info and pagination for accepted papers will also be assigned by the Editorial Office.
+
+%------------------
+% moreauthors
+%------------------
+% If there is only one author the class option oneauthor should be used. Otherwise use the class option moreauthors.
+
+%---------
+% pdftex
+%---------
+% The option pdftex is for use with pdfLaTeX. If eps figures are used, remove the option pdftex and use LaTeX and dvi2pdf.
+
+%=================================================================
+\firstpage{1}
+\makeatletter
+\setcounter{page}{\@firstpage}
+\makeatother
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2021}
+\copyrightyear{2020}
+%\externaleditor{Academic Editor: Firstname Lastname}
+\datereceived{}
+\dateaccepted{}
+\datepublished{}
+
+%------------------------------------------------------------------
+% The following line should be uncommented if the LaTeX file is uploaded to arXiv.org
+%\pdfoutput=1
+
+%=================================================================
+% Add packages and commands here. The following packages are loaded in our class file: fontenc, inputenc, calc, indentfirst, fancyhdr, graphicx, epstopdf, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, tabto, xcolor, soul, multirow, microtype, tikz, totcount, changepage, paracol, attrib, upgreek, cleveref, amsthm, hyphenat, natbib, hyperref, footmisc, url, geometry, newfloat, caption
+
+
+%=================================================================
+%% Please use the following mathematics environments: Theorem, Lemma, Corollary, Proposition, Characterization, Property, Problem, Example, ExamplesandDefinitions, Hypothesis, Remark, Definition, Notation, Assumption
+%% For proofs, please use the proof environment (the amsthm package is loaded by the MDPI class).
+
+%=================================================================
+% Full title of the paper (Capitalized)
+\Title{Design of a Bi-Directional DC/DC Converter with Interleaved Half-bridges Based on GaN HEMTs}
+
+% MDPI internal command: Title for citation in the left column
+\TitleCitation{Design of a Bi-Directional DC/DC Converter with Interleaved Half-bridges Based on GaN HEMTs}
+
+% Author Orchid ID: enter ID or remove command
+\newcommand{\orcidauthorA}{0000-0002-8747-9143} % Add \orcidA{} behind the author's name
+\newcommand{\orcidauthorB}{0000-0002-6311-7906} % Add \orcidB{} behind the author's name
+
+% Authors, for the paper (add full first names)
+\Author{Furkan Karakaya $^{1,}$\orcidA{}; Ozan Keysan $^{1,}$\orcidB{}$^{,}$*}
+
+% MDPI internal command: Authors, for metadata in PDF
+%\AuthorNames{Firstname Lastname, Firstname Lastname and Firstname Lastname}
+
+% MDPI internal command: Authors, for citation in the left column
+\AuthorCitation{Karakaya, F.; Keysan, O.}
+
+% Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
+\address{%
+$^{1}$ \quad METU Powerlab, Middle East Technical University, Ankara, Turkey; kfurkan@metu.edu.tr; keysan@metu.edu.tr}
+
+% Contact information of the corresponding author
+\corres{Correspondence: keysan@metu.edu.tr}
+
+% Current address and/or shared authorship
+%\firstnote{Current address: Middle East Technical University, Electrical and Electronics Engineering Department, Ankara, Turkey}
+%\secondnote{These authors contributed equally to this work.}
+% The commands \thirdnote{} till \eighthnote{} are available for further notes
+
+%\simplesumm{} % Simple summary
+
+%\conference{} % An extended version of a conference paper
+
+% Abstract (Do not insert blank lines, i.e. \\)
+\abstract{ABSTRACT GOES HERE Max. 200 Words.}
+
+% Keywords
+\keyword{Gallium Nitride, GaN HEMT, Bi-directional DC/DC Converter; Power Density; Interleaving; High-frequency Operation}
+
+% The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
+%\PACS{J0101}
+%\MSC{}
+%\JEL{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Diversity
+%\LSID{\url{http://}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Applied Sciences:
+%\featuredapplication{Authors are encouraged to provide a concise description of the specific application or a potential application of the work. This section is not mandatory.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Data:
+%\dataset{DOI number or link to the deposited data set in cases where the data set is published or set to be published separately. If the data set is submitted and will be published as a supplement to this paper in the journal Data, this field will be filled by the editors of the journal. In this case, please make sure to submit the data set as a supplement when entering your manuscript into our manuscript editorial system.}
+
+%\datasetlicense{license under which the data set is made available (CC0, CC-BY, CC-BY-SA, CC-BY-NC, etc.)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Toxins
+%\keycontribution{The breakthroughs or highlights of the manuscript. Authors can write one or two sentences to describe the most important part of the paper.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Encyclopedia
+%\encyclopediadef{Instead of the abstract}
+%\entrylink{The Link to this entry published on the encyclopedia platform.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+Even though it is possible to construct many different topologies with the half-bridge board, an example design of a bi-directional DC/DC converter application is performed where the maximization of power density is aimed. The bi-directional DC/DC converters are widely used as an interface for energy storage systems like batteries for applications such as telecom, automotive, and space \cite{Das2010, Huang2016b}. Based on the requirement of the application, the bi-directional DC/DC converter can be selected as an isolated or non-isolated topology. Unless the galvanic isolation is a must for the operation, the non-isolated topologies are more advantageous in terms of simplicity, cost, and the number of components \cite{Das2010, Yang2014}.
+
+Further, today's trend with increasing demand is having compact, lightweight, small-sized power converters that give no option but increasing the switching frequency \cite{Konjedic2016}. However, the increased switching frequency results in higher switching losses, reduced efficiency \cite{Konjedic2016}, and more importantly increased cooling component size. In order to overcome these problems, zero voltage switching (ZVS) turns into a must for bi-directional DC/DC converters.
+
+The most common non-isolated bi-directional DC/DC converter is the buck/boost type converter with synchronous (synch.) switching. The high efficiency and simple structure of this topology \cite{Pavlovsky2014} draw the attention. However, the most limiting factor of the synchronous buck/boost converter is the reverse recovery losses of the synch. switch's body diode especially for higher voltage applications. For example, synch. switches are hardly found in applications with 200~V and higher voltage ratings since the reverse recovery causes much more losses for higher voltage ratings \cite{Mao2008}. The problem of reverse recovery is the stepped-up switching current of the main switch and also synch. switch and electromagnetic interference (EMI) caused by a sharp increase of reverse recovery current \cite{Konjedic2016,Mao2008, Chen2016}.
+
+In order to deal with the reverse recovery phenomenon, ZVS can be implemented as it was required for high-frequency applications where compactness of the converter is aimed. The ideal switching operation is: all switches’ body diodes conduct prior to turn-on of the switches' channels, and all switches turn off with inductive load instead of capacitive load \cite{Mao2008}. Fortunately, GaN HEMTs are now available on the market and they do not suffer from reverse recovery. However, the increase in switching frequency is still advantageous for compactness, so ZVS is required even for GaN HEMTs to reduce cooling component size.
+
+There are three main methods for achieving ZVS on a bi-directional DC/DC converter. Adding extra active components for having resonant tanks, utilizing quasi or multi resonant converter at the cost of high peak voltage stress over switches, and lastly, lowering the inductance so that the inductor current can flow in both direction in a switching cycle and charges/discharges output capacitance of switches \cite{Das2010}. The last method is also called the quasi-square wave (QSW) ZVS method. In this thesis, the ZVS is achieved with the QSW ZVS method.
+
+In the literature, achieving soft switching with low inductance is well discussed with pros and cons. Firstly, having low inductance results in increased current ripple, i.e. at least twice the average current, which causes much more conduction losses \cite{Das2010,Huang2016b,Chen2016,Lee2015}. A more circumspect solution would be preferring critical conduction mode (CrCM) switching where the main switch is turned on when the inductor current crosses the zero. The main disadvantage of the CrCM is the requirement of a long resonant period which limits the increase in switching frequency. Nevertheless, a coupled inductor design would help to increase resonant current so that the resonant period shortens. A well-prepared design where coupled inductors are used for CrCM switching with GaN HEMTs is presented in \cite{Huang2016b} for 1.2~kW application at 1~MHz switching frequency. Moreover, it is still possible to apply quasi-square wave (QSW) ZVS at the cost of high current ripple \cite{Mao2008}. \cite{Lee2015} utilizes QSW ZVS; in other words, zero-voltage resonant-transition (ZVRT), for a GaN HEMT based 25~W converter application at 3~MHz switching frequency. Additionally, even though it is a different topology aiming DC to AC conversion, the finalist applications of the Google Little Box challenge were using dual-buck H-bridge topology where ZVS is similarly achieved by allowing negative valley current \cite{Huang2019}.
+
+In this thesis, a 5.4~kW bi-directional DC/DC converter with QSW ZVS is designed with GaN-based half-bridge prototypes. The converter utilizes two half-bridges to cancel out inductor current ripple so that output voltage ripple and capacitor ESR losses \cite{Lee2015} would be reduced.
+
+The bi-directional DC/DC converters are used to construct an interface to energy storage systems. Especially, the increase in the usage of renewable energy sources requires energy storage systems like batteries where bi-directional power flow is required \cite{Yang2014}. The buck/boost type bi-directional DC/DC converters are also used for onboard chargers and between the battery and the inverter bus of electric vehicles \cite{Huang2016b, Khan2015}, electric scooters or electric wheelchairs, and telecom energy systems \cite{Lee2006}. In this chapter, a design example of a bi-directional DC/DC converter with the proposed half-bridges in Chapter is performed and discussed.
+
+
+Bi-directional DC/DC converters are used for interconnecting two DC terminals where power flow capability is required in both ways. These converters are preferred to be in low volume for high power density applications such as the regulator which connects the battery and motor driver input in an electric vehicle. Fig.~ shows the mind map of a design protocol where "High Power Density" is taken as design input. The converter size is mostly dominated by passive components \cite{Marz2011} which can be reduced by increasing switching frequency. However, the high switching frequency results in high switching losses on switching components, especially for high power applications. Soft switching is a method to eliminate switching losses and can be applied to a Buck / Boost type DC/DC converter easily by quasi-square wave zero voltage switching (QSW ZVS). Even though QSW ZVS is an easy way to achieve soft switching, it suffers from high current ripple on inductors which mainly increases the stress on output filter capacitor and on transistors by causing high conduction losses. Thanks to device paralleling, conduction losses can be shared among parallel-connected transistors and it reduces the conduction loss per switch. Moreover, soft-switching makes device paralleling easy by smoothing switching transitions. The stress on the output filter capacitors can be handled by interleaving half-bridges which significantly shrinks the ripple current flowing through filter capacitors. As a result, the passive components in small size can be used to filter output voltage.
+
+\cite{Li2019} investigates A AC/DC converter with three op. modes such as buck, boost and buck-boost modes. Utilization factor of DC inductor is increased and less switching components are used. Experimental results are provided. The proposed system is suitable for AC grid connected DC nano-grid converters.
+
+\cite{Aiello2020} investigates a bi-directional battery charger (BBC) which includes two power stages: a power factor corrector and a dual-active bridge converter. The converter manages to satisfy power factor correction in both directions from grid to EV and from EV battery to the grid. Simulation and experimental results are provided. The proposed system is suitable for an EV battery charger application.
+
+\cite{Adamowicz2020}
+SiCFETs
+Traction application
+DAB DC/DC Converter
+Non audible range of switching frequency
+
+\cite{Lamantia2020} explains the design of DAB converter with its control loops including parallel power cells as well. The SiC MOSFETs are preferred and 100 kHz of sw frequency is applied. This design aims more electric air crafts.
+
+\cite{Ojeda-Rodriguez2020} compares different topologies for air crafts:
+%- DAB-PS
+%- DAB-TT
+%- DAB-3P
+%- CD
+%- ABAC
+
+DAB-TT and DAB-3P are the most advantageous ones in terms of efficiency. Doubling frequency does not help a lot to reduce the total weight. With reduced filtering requirements DAB-3P is the most advantageous topology.
+
+\cite{MashinchiMaheri2020} investigates the impact of transformer turns ration on the efficiency for an isolated buck-boost converter. It is highlighted that for different operation voltage the converter gets into buck or boost mode which displays different efficiency characteristics. A high turns ratio leads an operation in buck mode with higher winding current, so the losses increase. An optimal transformer design is required to maximize the efficiency.
+
+\cite{Lin2017} proposes two series connected H bridges where one of them operates as phase shifted PWM converter and the other one operates as an LLC converter. LLC converter is connected to the lagging leg of the converter to increase the soft switching range. A magnetic current balance transformer is connected between these two converters' primary sides.
+
+\cite{Chen2020} proposes a non isolated DC/DC converter with large gain. However, this topology suffer from the sensitivity of the gain to the duty cycle and reduced efficiencies due to switching components.
+
+\cite{Stala2020} proposes a converter based on a modified voltage multiplier with switched capacitors. The goal is to reduce the active component in a voltage multiplier circuit. However, the efficiency is in the range of 90\% and the power density is mainly neglected. Moreover, diode based converter design eliminates the bi-directional operation.
+
+\cite{Tran2020} focuses on the optimization of an interleaved boost converter considering the input current ripple, weight of the inductors, power losses and absolute error of the output voltage. That design includes 60~kW of power rating where SiC devices and liquid cooling are preferred to maximize the power density. The reported volumetric power density is 4.4~kW/l.
+
+\cite{Moradpour2020} optimizes the gate resistor in terms of increasing the efficiency and minimizing the EMI noises. In order to solve the optimization problem a numeric method is followed where the data set is constructed with experimental efficiency measurement and ground current measurement flows through the parasitic capacitances between switching node and the heat sink. An optimized gate driver selection for on and off states, an increase in the efficiency and decrease in the EMI noise can be obtained. The result is verified by a SiC based bi-directional DC/DC converter.
+
+\cite{Zhu2020} proposes a bi-directional DC/DC converter with interleaved legs connected to different sources. An interesting improvement in that converter is the capacitor which is connected in series with the inductor result in twice voltage gain in buck and boost modes. The simplicity of that design is one of the important advantages it has. Moreover, the change in the duty cycle results in easy prediction of inductor current of each leg.
+
+\cite{VanDeSande2020} investigates the electro-thermal performance of a three leg interleaved boost converter used for PV panels. That study estimates the increased importance of reliability concerns for PV converter for the following years and analyzes the factors effecting the thermal stress models over MOSFETs. It is concluded that it is not required to model temperature dependency of dc link capacitors for analyzing the thermal stress on the MOSFET; however, it is essential to include the parametric variations of MOSFETs, inductors and diodes with respect to the temperature for accurate estimation.
+
+\cite{Waradzyn2020} improves the switching capacitor voltage multiplier circuit with GaN HEMTs. The ability of operating at higher frequency of GaNs enable to have a switching frequency beyond the resonant frequency. Therefore, it is possible to remain high efficiency even for higher frequencies. Moreover, synchronous operation now makes it possible to have a bi-directional characteristics for battery powered applications. Low stored energy at the output capacitance of GaN HEMTs enable to charge and discharge immediately and paves the way for zero voltage switching operation as well.
+
+\cite{Frivaldsky2020} compares modular, i.e. series connected bi-directional DC/DC converter modules and non-modular, i.e. single module, bi-directional DC/DC converters based on utilization of semiconductors. On the one hand, a SiC based 1~kW design is performed with 150~kHz of switching frequency; on the other hand, a 1~kW design is performed with eight GaN based 125~W converters operated at 500~kHz of switching frequency. The comparison results show that, for higher output powers the efficiency of the non-modular design is higher than the modular design. However, for all operation range the modular structure is advantageous in terms of output current ripple.
+
+\section{Design Algorithm of the Bi-directional DC/DC Converter}
+
+%\section{Quasi-Square Wave Zero Voltage Switching}
+
+%\subsection{Design and Selection of Passive Components}
+
+%\subsubsection{Inductor Design}
+%\subsubsection{Filter Capacitor Selection}
+
+%\subsection{Interleaving}
+
+%\section{Experimental Results}
+%\subsection{Thermal Tests}
+%\subsection{Converter Tests}
+
+\begin{table}[!t]
+\caption{}
+\label{tab:Ch6_ConverterComparison}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+ & Study & $P_o$ & $f_{sw}$  &  Topology & Device\\
+ \hline
+ A&Pavlovsky et al.  \cite{Pavlovsky2014} &14 kW & 66 kHz    & MBB* & Si MOSFET  \\
+ \hline
+ B&Rodriguez et al.  \cite{Rodriguez2018} &10 kW & 20 kHz    & Boost  & SiCFET\\
+ \hline
+ C&Stevanovic et al.  \cite{Stevanovic2019} &3.05 kW & 64 kHz    & Boost  & SiCFET\\
+ \hline
+ D&Konjedic et al.  \cite{Konjedic2016} &1 kW& 100 kHz   & Buck \& Boost & Si MOSFET\\
+ \hline
+ E&Sinha et al.   \cite{Sinha2019} &600 W& 20 kHz   & Buck & Si MOSFET\\
+ \hline
+ F&Yang et al.   \cite{Yang2014} &200 W& 50 kHz    & MBB & Si MOSFET\\
+ \hline
+ G&Das et al.   \cite{Das2010} &  200 W& 66 kHz  & MBB & Si MOSFET\\
+ \hline
+ H&Ahmadi  et al.   \cite{Ahmadi2012} & 200 W & 100 kHz & MBB & Si IGBT\\
+ \hline
+ I&Chen et al.   \cite{Chen2016} & 115 W & 100 kHz & MBB & Si MOSFET\\
+ \hline
+ J&Veerachary \cite{Veerachary2016} & 75 W & 100 kHz  & Modified Buck & Si MOSFET\\
+ \hline
+ K&Mao et al.   \cite{Mao2008} & 96 W & 300 kHz & MBB & Si MOSFET\\
+ \hline
+ L&Pajn\`{i}c et al.   \cite{Pajnic2019} & 60 W & 750 kHz & MBB & GaN\\
+ \hline
+ M&Huang et al.   \cite{Huang2016b} & 1.2 kW & 1 MHz & MBB & GaN\\
+ \hline
+ N&Lee et al.   \cite{Lee2015} & 20 W & 3 MHz & Buck & GaN\\
+ \hline
+% \rowcolor{Gray}
+ Z & This study & 5.4 kW & 450 kHz & Buck \& Boost & GaN\\
+ \hline
+\end{tabular}
+\begin{flushleft}
+(*) Modified Buck \& Boost topology
+\end{flushleft}
+\end{table}
+
+
+% The MDPI table float is called specialtable
+\begin{specialtable}[H]
+\caption{This is a table caption. Tables should be placed in the main text near to the first time they are~cited.\label{tab1}}
+%%% \tablesize{} %% You can specify the fontsize here, e.g., \tablesize{\footnotesize}. If commented out \small will be used.
+\begin{tabular}{ccc}
+\toprule
+\textbf{Title 1}	& \textbf{Title 2}	& \textbf{Title 3}\\
+\midrule
+Entry 1		& Data			& Data\\
+Entry 2		& Data			& Data\\
+\bottomrule
+\end{tabular}
+\end{specialtable}
+
+
+
+
+% Example of a figure that spans the whole page width (the commands \widefigure and \begin{paracol}{2}, \linenumbers, and\switchcolumn need to be present). The same concept works for tables, too.
+%\begin{figure}[H]	
+%\widefigure
+%\includegraphics[width=15 cm]{Definitions/logo-mdpi}
+%\caption{This is a wide figure.\label{fig2}}
+%\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+
+This section is not mandatory, but can be added to the manuscript if the discussion is unusually long or complex.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{6pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% optional
+%\supplementary{The following are available online at \linksupplementary{s1}, Figure S1: title, Table S1: title, Video S1: title.}
+
+% Only for the journal Methods and Protocols:
+% If you wish to submit a video article, please do so with any other supplementary material.
+% \supplementary{The following are available at \linksupplementary{s1}, Figure S1: title, Table S1: title, Video S1: title. A supporting video article is available at doi: link.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\authorcontributions{For research articles with several authors, a short paragraph specifying their individual contributions must be provided. The following statements should be used ``Conceptualization, X.X. and Y.Y.; methodology, X.X.; software, X.X.; validation, X.X., Y.Y. and Z.Z.; formal analysis, X.X.; investigation, X.X.; resources, X.X.; data curation, X.X.; writing---original draft preparation, X.X.; writing---review and editing, X.X.; visualization, X.X.; supervision, X.X.; project administration, X.X.; funding acquisition, Y.Y. All authors have read and agreed to the published version of the manuscript.'', please turn to the  \href{http://img.mdpi.org/data/contributor-role-instruction.pdf}{CRediT taxonomy} for the term explanation. Authorship must be limited to those who have contributed substantially to the work~reported.}
+
+%\funding{Please add: ``This research received no external funding'' or ``This research was funded by NAME OF FUNDER grant number XXX.'' and  and ``The APC was funded by XXX''. Check carefully that the details given are accurate and use the standard spelling of funding agency names at \url{https://search.crossref.org/funding}, any errors may affect your future funding.}
+
+%\institutionalreview{In this section, you should add the Institutional Review Board Statement and approval number, if relevant to your study. You might choose to exclude this statement if the study did not require ethical approval. Please note that the Editorial Office might ask you for further information. Please add ``The study was conducted according to the guidelines of the Declaration of Helsinki, and approved by the Institutional Review Board (or Ethics Committee) of NAME OF INSTITUTE (protocol code XXX and date of approval).'' OR ``Ethical review and approval were waived for this study, due to REASON (please provide a detailed justification).'' OR ``Not applicable'' for studies not involving humans or animals.}
+
+\informedconsent{Not applicable}
+
+\dataavailability{Please refer to suggested Data Availability Statements in section “MDPI Research Data Policies” at \href{https://www.mdpi.com/ethics}{https://www.mdpi.com/ethics}.}
+
+\acknowledgments{In this section you can acknowledge any support given which is not covered by the author contribution or funding sections. This may include administrative and technical support, or donations in kind (e.g., materials used for experiments).}
+
+\conflictsofinterest{The authors declare no conflict of interest.}
+
+%% Optional
+%\sampleavailability{Samples of the compounds ... are available from the authors.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Only for journal Encyclopedia
+%\entrylink{The Link to this entry published on the encyclopedia platform.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Optional
+%\abbreviations{The following abbreviations are used in this manuscript:\\
+
+%\noindent
+%\begin{tabular}{@{}ll}
+%MDPI & Multidisciplinary Digital Publishing Institute\\
+%DOAJ & Directory of open access journals\\
+%TLA & Three letter acronym\\
+%%\end{tabular}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Optional
+\appendixtitles{no} % Leave argument "no" if all appendix headings stay EMPTY (then no dot is printed after "Appendix A"). If the appendix sections contain a heading then change the argument to "yes".
+\appendix
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\end{paracol}
+\reftitle{References}
+
+% Please provide either the correct journal abbreviation (e.g. according to the “List of Title Word Abbreviations” http://www.issn.org/services/online-services/access-to-the-ltwa/) or the full name of the journal.
+% Citations and References in Supplementary files are permitted provided that they also appear in the reference list here.
+
+%=====================================
+% References, variant A: external bibliography
+%=====================================
+\externalbibliography{yes}
+\bibliography{Converter.bib}
+
+%=====================================
+% References, variant B: internal bibliography
+%=====================================
+%\begin{thebibliography}{999}
+% Reference 1
+%\bibitem[Author1(year)]{ref-journal}
+%Author~1, T. The title of the cited article. {\em Journal Abbreviation} {\bf 2008}, {\em 10}, 142--149.
+% Reference 2
+%\bibitem[Author2(year)]{ref-book1}
+%Author~2, L. The title of the cited contribution. In {\em The Book Title}; Editor1, F., Editor2, A., Eds.; Publishing House: City, Country, 2007; pp. 32--58.
+% Reference 4
+%\bibitem[Author4(year)]{ref-unpublish}
+%Author 1, A.B.; Author 2, C. Title of Unpublished Work. \textit{Abbreviated Journal Name} stage of publication (under review; accepted; in~press).
+% Reference 5
+%\bibitem[Author5(year)]{ref-communication}
+%Author 1, A.B. (University, City, State, Country); Author 2, C. (Institute, City, State, Country). Personal communication, 2012.
+% Reference 6
+%\bibitem[Author6(year)]{ref-proceeding}
+%Author 1, A.B.; Author 2, C.D.; Author 3, E.F. Title of Presentation. In Title of the Collected Work (if available), Proceedings of the Name of the Conference, Location of Conference, Country, Date of Conference; Editor 1, Editor 2, Eds. (if available); Publisher: City, Country, Year (if available); Abstract Number (optional), Pagination (optional).
+% Reference 7
+%\bibitem[Author7(year)]{ref-thesis}
+%Author 1, A.B. Title of Thesis. Level of Thesis, Degree-Granting University, Location of University, Date of Completion.
+% Reference 8
+%\bibitem[Author8(year)]{ref-url}
+%Title of Site. Available online: URL (accessed on Day Month Year).
+%\end{thebibliography}
+
+% The following MDPI journals use author-date citation: Arts, Econometrics, Economies, Genealogy, Humanities, IJFS, JRFM, Laws, Religions, Risks, Social Sciences. For those journals, please follow the formatting guidelines on http://www.mdpi.com/authors/references
+% To cite two works by the same author: \citeauthor{ref-journal-1a} (\citeyear{ref-journal-1a}, \citeyear{ref-journal-1b}). This produces: Whittaker (1967, 1975)
+% To cite two works by the same author with specific pages: \citeauthor{ref-journal-3a} (\citeyear{ref-journal-3a}, p. 328; \citeyear{ref-journal-3b}, p.475). This produces: Wong (1999, p. 328; 2000, p. 475)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% for journal Sci
+%\reviewreports{\\
+%Reviewer 1 comments and authors’ response\\
+%Reviewer 2 comments and authors’ response\\
+%Reviewer 3 comments and authors’ response
+%}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
+
