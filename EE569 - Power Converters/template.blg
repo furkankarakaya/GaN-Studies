@@ -3,46 +3,81 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: template.aux
 Reallocating 'name_of_file' (item size: 1) to 17 items.
 The style file: Definitions/mdpi.bst
-Reallocating 'name_of_file' (item size: 1) to 14 items.
-Database file #1: Converter.bib
-You've used 33 entries,
+I found no \bibdata command---while reading file template.aux
+Warning--I didn't find a database entry for "Das2010"
+Warning--I didn't find a database entry for "Huang2016b"
+Warning--I didn't find a database entry for "Yang2014"
+Warning--I didn't find a database entry for "Konjedic2016"
+Warning--I didn't find a database entry for "Pavlovsky2014"
+Warning--I didn't find a database entry for "Mao2008"
+Warning--I didn't find a database entry for "Chen2016"
+Warning--I didn't find a database entry for "Lee2015"
+Warning--I didn't find a database entry for "Huang2019"
+Warning--I didn't find a database entry for "Khan2015"
+Warning--I didn't find a database entry for "Lee2006"
+Warning--I didn't find a database entry for "Marz2011"
+Warning--I didn't find a database entry for "Li2019"
+Warning--I didn't find a database entry for "Aiello2020"
+Warning--I didn't find a database entry for "Adamowicz2020"
+Warning--I didn't find a database entry for "Lamantia2020"
+Warning--I didn't find a database entry for "Ojeda-Rodriguez2020"
+Warning--I didn't find a database entry for "MashinchiMaheri2020"
+Warning--I didn't find a database entry for "Lin2017"
+Warning--I didn't find a database entry for "Chen2020"
+Warning--I didn't find a database entry for "Stala2020"
+Warning--I didn't find a database entry for "Tran2020"
+Warning--I didn't find a database entry for "Moradpour2020"
+Warning--I didn't find a database entry for "Zhu2020"
+Warning--I didn't find a database entry for "VanDeSande2020"
+Warning--I didn't find a database entry for "Waradzyn2020"
+Warning--I didn't find a database entry for "Frivaldsky2020"
+Warning--I didn't find a database entry for "Jafari2020a"
+Warning--I didn't find a database entry for "Jafari2020b"
+Warning--I didn't find a database entry for "Rodriguez2018"
+Warning--I didn't find a database entry for "Stevanovic2019"
+Warning--I didn't find a database entry for "Sinha2019"
+Warning--I didn't find a database entry for "Ahmadi2012"
+Warning--I didn't find a database entry for "Veerachary2016"
+Warning--I didn't find a database entry for "Pajnic2019"
+You've used 0 entries,
             2862 wiz_defined-function locations,
-            809 strings with 12303 characters,
-and the built_in function-call counts, 13751 in all, are:
-= -- 1114
-> -- 875
-< -- 9
-+ -- 326
-- -- 260
-* -- 1421
-:= -- 2232
-add.period$ -- 130
-call.type$ -- 33
-change.case$ -- 33
-chr.to.int$ -- 33
-cite$ -- 33
-duplicate$ -- 603
-empty$ -- 1088
-format.name$ -- 303
-if$ -- 2780
+            627 strings with 4621 characters,
+and the built_in function-call counts, 18 in all, are:
+= -- 0
+> -- 0
+< -- 0
++ -- 0
+- -- 0
+* -- 0
+:= -- 12
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 0
+format.name$ -- 0
+if$ -- 0
 int.to.chr$ -- 1
-int.to.str$ -- 33
-missing$ -- 33
-newline$ -- 199
-num.names$ -- 99
-pop$ -- 173
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 3
+num.names$ -- 0
+pop$ -- 0
 preamble$ -- 0
-purify$ -- 33
+purify$ -- 0
 quote$ -- 0
-skip$ -- 304
+skip$ -- 0
 stack$ -- 0
-substring$ -- 653
-swap$ -- 146
-text.length$ -- 2
+substring$ -- 0
+swap$ -- 0
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 231
+type$ -- 0
 warning$ -- 0
-while$ -- 111
+while$ -- 0
 width$ -- 0
-write$ -- 460
+write$ -- 2
+(There was 1 error message)

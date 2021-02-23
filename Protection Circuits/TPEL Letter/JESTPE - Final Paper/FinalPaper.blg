@@ -1,0 +1,62 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: FinalPaper.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: IEEEtran.bst
+Reallocating 'name_of_file' (item size: 1) to 20 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Database file #1: Device-2020-Feb.bib
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty journal in Dusmez2018
+Warning--empty journal in Reusch2016
+Warning--empty journal in GaNSystemsInc.2020
+
+Done.
+You've used 26 entries,
+            4087 wiz_defined-function locations,
+            991 strings with 13701 characters,
+and the built_in function-call counts, 22527 in all, are:
+= -- 1830
+> -- 602
+< -- 217
++ -- 330
+- -- 101
+* -- 1114
+:= -- 3317
+add.period$ -- 53
+call.type$ -- 26
+change.case$ -- 26
+chr.to.int$ -- 528
+cite$ -- 29
+duplicate$ -- 1531
+empty$ -- 1643
+format.name$ -- 123
+if$ -- 5219
+int.to.chr$ -- 0
+int.to.str$ -- 26
+missing$ -- 258
+newline$ -- 121
+num.names$ -- 26
+pop$ -- 606
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 1693
+stack$ -- 0
+substring$ -- 1254
+swap$ -- 1330
+text.length$ -- 41
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 26
+warning$ -- 3
+while$ -- 122
+width$ -- 28
+write$ -- 296
+(There were 3 warnings)
